@@ -1,5 +1,14 @@
-.search-box{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.search-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+mat-form-field {
+  width: 400px;
+  max-width: 90%;
+}
+img{
+    max-height: 200px;
 }
