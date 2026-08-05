@@ -1,25 +1,22 @@
 <form class="search-box">
-  <mat-form-field class="example-full-width">
-    <mat-label>Add a team...</mat-label>
+    <mat-form-field class="example-full-width">
+        <mat-label>Add a team...</mat-label>
 
-    <input
-      type="text"
-      matInput
-      placeholder="Search for a team"
-      [formControl]="myControl"
-      [matAutocomplete]="auto">
+        <input type="text" matInput placeholder="Search for a team" [formControl]="myControl" [matAutocomplete]="auto">
 
-    <mat-autocomplete
-      #auto="matAutocomplete"
-      [displayWith]="displayTeam"
-      (optionSelected)="onTeamSelected($event)">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayTeam" (optionSelected)="onTeamSelected($event)">
 
-      @for (team of filteredTeams | async; track team.espnId) {
-        <mat-option [value]="team">
-          {{ team.schoolName }}
-        </mat-option>
-      }
+            @for (team of filteredTeams | async; track team.espnId) {
+            <mat-option [value]="team">
+                {{ team.schoolName }}
+            </mat-option>
+            }
 
-    </mat-autocomplete>
-  </mat-form-field>
+
+
+        </mat-autocomplete>
+    </mat-form-field>
 </form>
+@for (team of selectedTeams; track team.espnId) {
+<img [src]="'https://a.espncdn.com/i/teamlogos/ncaa/500/' + team.espnId + '.png'" [alt]="team.schoolName + ' logo'">
+}
