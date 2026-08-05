@@ -1,89 +1,22 @@
-.bubble-page {
+.input-row {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 30px;
-  padding: 40px 20px;
-}
-
-/* Search */
-.search-box {
-  width: 400px;
-  max-width: 90vw;
+  justify-content: center;
+  gap: 1.25rem;
+  width: 100%;
+  padding: 2rem;
+  background-color: #f1f5f9;
+  border-radius: 1rem;
 }
 
 mat-form-field {
-  width: 100%;
+  width: 15.625rem;
 }
 
-/* Bubble area */
-.bubble-container {
-  width: 600px;
-  max-width: 90vw;
-  min-height: 300px;
-  border-radius: 50%;
-  border: 3px solid #1976d2;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: center;
-  gap: 25px;
-  padding: 40px;
-  box-sizing: border-box;
+button {
+  height: 3.5rem;
 }
 
-/* Team cards */
-.team-card {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: white;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  transition: transform 0.2s ease;
-  position: relative;
-}
-
-.team-card:hover {
-  transform: scale(1.08);
-}
-
-.team-card img {
-  width: 55px;
-  height: 55px;
-  object-fit: contain;
-}
-
-.team-name {
-  font-size: 12px;
-  margin-top: 5px;
-  text-align: center;
-}
-
-/* Remove button */
-.remove-button {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  transform: scale(.75);
-}
-
-/* User form */
-.user-form {
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-  max-width: 90vw;
-  gap: 15px;
-}
-
-/* Submit */
-.submit-button {
-  width: 100%;
-}
 img{
     max-height: 200px;
 }

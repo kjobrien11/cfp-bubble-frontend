@@ -91,21 +91,25 @@ export class BubbleComponent implements OnInit {
     this.myControl.setValue(null);
   }
 
-  submit() {
-  const request: BubbleRequest = {
-    name: this.name,
-    email: this.email,
-    teams: this.selectedTeams.map(team => team.espnId)
-  };
+  clear(): void{
+    this.selectedTeams = [];
+  }
 
-  this.bubbleService.createBubble(request)
-    .subscribe({
-      next: response => {
-        console.log(response);
-      },
-      error: err => {
-        console.error(err);
-      }
-    });
-}
+  submit() {
+    const request: BubbleRequest = {
+      name: this.name,
+      email: this.email,
+      teams: this.selectedTeams.map(team => team.espnId)
+    };
+
+    this.bubbleService.createBubble(request)
+      .subscribe({
+        next: response => {
+          console.log(response);
+        },
+        error: err => {
+          console.error(err);
+        }
+      });
+  }
 }

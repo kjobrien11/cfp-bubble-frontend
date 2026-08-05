@@ -1,37 +1,49 @@
-<div class="search-box">
-    <mat-form-field class="example-full-width">
+<div class="input-row">
+    <mat-form-field>
         <mat-label>Add a Team...</mat-label>
 
-        <input type="text" matInput placeholder="Search for a team" [formControl]="myControl" [matAutocomplete]="auto">
+        <input 
+            type="text"
+            matInput
+            placeholder="Search for a team"
+            [formControl]="myControl"
+            [matAutocomplete]="auto">
 
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayTeam" (optionSelected)="onTeamSelected($event)">
+        <mat-autocomplete 
+            #auto="matAutocomplete"
+            [displayWith]="displayTeam"
+            (optionSelected)="onTeamSelected($event)">
 
             @for (team of filteredTeams | async; track team.espnId) {
-            <mat-option [value]="team">
-                {{ team.schoolName }}
-            </mat-option>
+                <mat-option [value]="team">
+                    {{ team.schoolName }}
+                </mat-option>
             }
 
         </mat-autocomplete>
     </mat-form-field>
+
     <mat-form-field>
         <mat-label>Name</mat-label>
         <input matInput [(ngModel)]="name">
     </mat-form-field>
+
     <mat-form-field>
         <mat-label>Email</mat-label>
         <input matInput [(ngModel)]="email">
     </mat-form-field>
-</div>
 
-   <button mat-fab>
+    <button mat-fab (click)="clear()">
         <mat-icon>delete</mat-icon>
     </button>
 
     <button mat-fab extended (click)="submit()">
         <mat-icon>check</mat-icon>
-        submit
+        Submit
     </button>
+</div>
+
+   
 @for (team of selectedTeams; track team.espnId) {
 <img [src]="'https://a.espncdn.com/i/teamlogos/ncaa/500/' + team.espnId + '.png'" [alt]="team.schoolName + ' logo'">
 }
