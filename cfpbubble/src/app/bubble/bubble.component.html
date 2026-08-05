@@ -1,4 +1,4 @@
-<form class="search-box">
+<div class="search-box">
     <mat-form-field class="example-full-width">
         <mat-label>Add a Team...</mat-label>
 
@@ -15,12 +15,14 @@
         </mat-autocomplete>
     </mat-form-field>
     <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input matInput>
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="name">
     </mat-form-field>
-
- 
-</form>
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="email">
+    </mat-form-field>
+</div>
 
    <button mat-fab>
         <mat-icon>delete</mat-icon>

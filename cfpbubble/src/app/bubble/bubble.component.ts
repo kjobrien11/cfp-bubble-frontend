@@ -12,6 +12,8 @@ import { Team } from '../dtos/Team';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { BubbleService } from '../services/bubble.service';
+import { BubbleRequest } from '../dtos/bubble-request';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-bubble',
@@ -23,7 +25,8 @@ import { BubbleService } from '../services/bubble.service';
     ReactiveFormsModule,
     AsyncPipe,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule
   ],
   templateUrl: './bubble.component.html',
   styleUrl: './bubble.component.css'
@@ -33,6 +36,8 @@ export class BubbleComponent implements OnInit {
   teams: Team[] = [];
   filteredTeams!: Observable<Team[]>;
   selectedTeams: Team[] = [];
+  name = '';
+  email = '';
 
   myControl = new FormControl<Team | null>(null);
 
@@ -87,18 +92,20 @@ export class BubbleComponent implements OnInit {
   }
 
   submit() {
-    const teamIds = this.selectedTeams.map(team => team.espnId);
-    console.log(teamIds);
-    this.bubbleService.createBubble(teamIds).subscribe({
-      next: (response) => {
-        console.log("Response:", response);
+  const request: BubbleRequest = {
+    name: this.name,
+    email: this.email,
+    teams: this.selectedTeams.map(team => team.espnId)
+  };
+
+  this.bubbleService.createBubble(request)
+    .subscribe({
+      next: response => {
+        console.log(response);
       },
-      error: (err) => {
-        console.error("Error:", err);
-      },
-      complete: () => {
-        console.log("Request complete");
+      error: err => {
+        console.error(err);
       }
     });
-  }
+}
 }

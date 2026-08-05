@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { BubbleRequest } from '../dtos/bubble-request';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +12,7 @@ export class BubbleService {
 
   private apiUrl = '/bubbles';
 
-  createBubble(teamIds: number[]): Observable<any> {
-    let body = {
-    "name": "KJ O'Brien",
-    "email": "kjokjo219@gmail.comm",
-    "teams": 
-        teamIds
-    
-}
-    return this.http.post<any>(this.apiUrl + "/create", body);
+  createBubble(request: BubbleRequest): Observable<any> {
+    return this.http.post<any>(this.apiUrl + "/create", request);
   }
 }
