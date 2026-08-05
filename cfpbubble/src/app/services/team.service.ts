@@ -18,4 +18,6 @@ export class TeamService {
   getTeams(): Observable<Team[]> {
     return this.http.get<Team[]>(this.apiUrl);
   } 
+
+  
 }

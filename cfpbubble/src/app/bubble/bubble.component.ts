@@ -9,6 +9,9 @@ import { MatInputModule } from '@angular/material/input';
 
 import { TeamService } from '../services/team.service';
 import { Team } from '../dtos/Team';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { BubbleService } from '../services/bubble.service';
 
 @Component({
   selector: 'app-bubble',
@@ -18,7 +21,9 @@ import { Team } from '../dtos/Team';
     MatInputModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
-    AsyncPipe
+    AsyncPipe,
+    MatButtonModule,
+    MatIconModule
   ],
   templateUrl: './bubble.component.html',
   styleUrl: './bubble.component.css'
@@ -31,7 +36,7 @@ export class BubbleComponent implements OnInit {
 
   myControl = new FormControl<Team | null>(null);
 
-  constructor(private teamService: TeamService) { }
+  constructor(private teamService: TeamService, private bubbleService: BubbleService) { }
 
   ngOnInit(): void {
     this.teamService.getTeams().subscribe({
@@ -79,5 +84,21 @@ export class BubbleComponent implements OnInit {
 
     // Clear the search box
     this.myControl.setValue(null);
+  }
+
+  submit() {
+    const teamIds = this.selectedTeams.map(team => team.espnId);
+    console.log(teamIds);
+    this.bubbleService.createBubble(teamIds).subscribe({
+      next: (response) => {
+        console.log("Response:", response);
+      },
+      error: (err) => {
+        console.error("Error:", err);
+      },
+      complete: () => {
+        console.log("Request complete");
+      }
+    });
   }
 }

@@ -14,7 +14,22 @@
 
         </mat-autocomplete>
     </mat-form-field>
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput>
+    </mat-form-field>
+
+ 
 </form>
+
+   <button mat-fab>
+        <mat-icon>delete</mat-icon>
+    </button>
+
+    <button mat-fab extended (click)="submit()">
+        <mat-icon>check</mat-icon>
+        submit
+    </button>
 @for (team of selectedTeams; track team.espnId) {
 <img [src]="'https://a.espncdn.com/i/teamlogos/ncaa/500/' + team.espnId + '.png'" [alt]="team.schoolName + ' logo'">
 }
