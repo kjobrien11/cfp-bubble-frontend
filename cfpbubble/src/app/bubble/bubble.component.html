@@ -1,0 +1,18 @@
+<mat-form-field>
+  <mat-label>Search team</mat-label>
+
+  <input
+    matInput
+    [matAutocomplete]="auto">
+
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option value="Georgia">
+      Florida
+    </mat-option>
+
+    <mat-option value="Ohio State">
+      Ohio State
+    </mat-option>
+  </mat-autocomplete>
+
+</mat-form-field>
