@@ -1,18 +1,25 @@
-<mat-form-field>
-  <mat-label>Search team</mat-label>
+<form class="search-box">
+  <mat-form-field class="example-full-width">
+    <mat-label>Add a team...</mat-label>
 
-  <input
-    matInput
-    [matAutocomplete]="auto">
+    <input
+      type="text"
+      matInput
+      placeholder="Search for a team"
+      [formControl]="myControl"
+      [matAutocomplete]="auto">
 
-  <mat-autocomplete #auto="matAutocomplete">
-    <mat-option value="Georgia">
-      Florida
-    </mat-option>
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      [displayWith]="displayTeam"
+      (optionSelected)="onTeamSelected($event)">
 
-    <mat-option value="Ohio State">
-      Ohio State
-    </mat-option>
-  </mat-autocomplete>
+      @for (team of filteredTeams | async; track team.espnId) {
+        <mat-option [value]="team">
+          {{ team.schoolName }}
+        </mat-option>
+      }
 
-</mat-form-field>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

@@ -1,35 +1,83 @@
 import { Component, OnInit } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Observable, map, startWith } from 'rxjs';
+
+import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { HttpClient } from '@angular/common/http';
+
 import { TeamService } from '../services/team.service';
 import { Team } from '../dtos/Team';
 
 @Component({
   selector: 'app-bubble',
-  imports: [MatFormFieldModule,
+  standalone: true,
+  imports: [
+    MatFormFieldModule,
     MatInputModule,
-    MatAutocompleteModule],
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    AsyncPipe
+  ],
   templateUrl: './bubble.component.html',
   styleUrl: './bubble.component.css'
 })
-export class BubbleComponent implements OnInit{
+export class BubbleComponent implements OnInit {
 
-  teams!: Team[]
+  teams: Team[] = [];
+  filteredTeams!: Observable<Team[]>;
+  selectedTeams: Team[] = [];
 
-  constructor(private teamService: TeamService) {}
+  myControl = new FormControl<Team | null>(null);
+
+  constructor(private teamService: TeamService) { }
+
   ngOnInit(): void {
-    this.teamService.getTeams()
-      .subscribe({
-        next: (teams) => {
-          this.teams = teams;
-          console.log(teams);
-        },
-        error: (err) => {
-          console.error(err);
-        }
-      });
+    this.teamService.getTeams().subscribe({
+      next: (teams) => {
+        this.teams = teams;
+
+        this.filteredTeams = this.myControl.valueChanges.pipe(
+          startWith(null),
+          map(value => {
+            const search =
+              typeof value === 'string'
+                ? value
+                : value?.schoolName ?? '';
+
+            return this.filterTeams(search);
+          })
+        );
+      },
+      error: err => console.error(err)
+    });
   }
 
+  private filterTeams(value: string): Team[] {
+    const filterValue = value.toLowerCase();
+
+    return this.teams.filter(team =>
+      team.schoolName.toLowerCase().includes(filterValue) ||
+      team.abbreviation.toLowerCase().includes(filterValue)
+    );
+  }
+
+  displayTeam(team: Team | null): string {
+    return team ? team.schoolName : '';
+  }
+
+  onTeamSelected(event: MatAutocompleteSelectedEvent): void {
+    const team = event.option.value as Team;
+
+    // Prevent duplicates
+    if (!this.selectedTeams.some(t => t.espnId === team.espnId)) {
+      this.selectedTeams.push(team);
+    }
+
+    console.log(this.selectedTeams);
+
+    // Clear the search box
+    this.myControl.setValue(null);
+  }
 }
