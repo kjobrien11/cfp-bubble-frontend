@@ -1,5 +1,5 @@
 {
-  "/": {
+  "/teams": {
     "target": "http://localhost:8433",
     "secure": false,
     "changeOrigin": true
