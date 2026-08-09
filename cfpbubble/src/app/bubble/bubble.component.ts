@@ -112,4 +112,10 @@ export class BubbleComponent implements OnInit {
         }
       });
   }
+
+  removeTeam(team: Team) {
+  this.selectedTeams = this.selectedTeams.filter(
+    t => t.espnId !== team.espnId
+  );
+}
 }

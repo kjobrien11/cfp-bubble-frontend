@@ -1,117 +1,319 @@
+/* =========================================================
+   PAGE
+   ========================================================= */
+
 .page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 3rem;
-    gap: 2rem;
-    background: #fafcff;
     min-height: 100vh;
+
+    box-sizing: border-box;
+
+    padding: 1rem 1.5rem 2rem;
+
+    background:
+        radial-gradient(
+            circle at 25% 40%,
+            rgba(117, 92, 255, .08),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #fafbff 0%,
+            #f6f4ff 100%
+        );
+
+    color: #17213d;
 }
 
-.hero {
-    text-align: center;
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.navbar {
+    width: min(100%, 95rem);
+
+    height: 4.25rem;
+
+    margin: 0 auto;
+
+    padding: 0 1.25rem;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: rgba(255,255,255,.92);
+
+    border: 1px solid rgba(225,222,245,.8);
+
+    border-radius: 1.25rem;
+
+    box-shadow:
+        0 .75rem 2rem rgba(70,60,150,.07);
+
+    backdrop-filter: blur(20px);
 }
 
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: .5rem;
-    font-weight: 700;
+
+.brand {
+    display: flex;
+    align-items: center;
+
+    gap: .65rem;
+
+    font-size: 1.2rem;
+    font-weight: 800;
+
+    white-space: nowrap;
 }
 
-.hero p {
-    color: #666;
+.brand-icon {
+    font-size: 1.4rem;
+}
+
+
+.nav-links {
+    display: flex;
+    align-items: center;
+
+    gap: .3rem;
+}
+
+
+.nav-link {
+    height: 2.7rem;
+
+    display: flex;
+    align-items: center;
+
+    gap: .45rem;
+
+    padding: 0 1rem;
+
+    border: none;
+    border-radius: .8rem;
+
+    background: transparent;
+
+    color: #70788e;
+
+    font-size: .85rem;
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.nav-link mat-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+
     font-size: 1.1rem;
 }
 
-/* ---------- Controls ---------- */
+.nav-link:hover {
+    background: #f1efff;
+    color: #6046e8;
+}
 
-.controls {
+.nav-link.active {
+    background: #eeeaff;
+    color: #6046e8;
+}
 
-    display: flex;
+
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
+
+.main-content {
+    width: min(100%, 95rem);
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        25rem;
+
+    gap: 4rem;
+
     align-items: center;
-    gap: 1rem;
 
-    padding: 2rem;
+    /*
+     * Leave a defined amount of space below
+     * the navbar instead of vertically centering
+     * based on the panel's content.
+     */
+    padding: 3rem 0;
 
-    width: min(90%, 75rem);
-
-    background: white;
-
-    border-radius: 1.5rem;
-
-    box-shadow:
-        0 1rem 2rem rgba(89,82,255,.08);
-
+    box-sizing: border-box;
 }
 
-.controls mat-form-field {
 
-    flex: 1;
+/* =========================================================
+   LEFT SIDE
+   ========================================================= */
 
+.bubble-area {
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 2rem;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
 }
 
-.controls button:last-child {
 
-    height: 3.5rem;
-    padding-inline: 2rem;
+/* =========================================================
+   HERO
+   ========================================================= */
 
+.hero {
+    text-align: center;
+
+    margin-bottom: 1.5rem;
+
+    max-width: 42rem;
 }
 
-/* ---------- Bubble ---------- */
+.hero h1 {
+    margin: 0;
 
-/* ---------- Bubble ---------- */
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
 
-/* ---------- Bubble ---------- */
+    font-weight: 800;
+
+    letter-spacing: -.045em;
+
+    color: #18213b;
+}
+
+.hero p {
+    margin: .7rem auto 0;
+
+    max-width: 36rem;
+
+    color: #747d94;
+
+    font-size: 1rem;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   BUBBLE LABEL
+   ========================================================= */
+
+.bubble-label {
+    margin-bottom: .75rem;
+
+    color: #6752d8;
+
+    font-size: .75rem;
+
+    font-weight: 800;
+
+    letter-spacing: .16em;
+}
+
+
+/* =========================================================
+   BUBBLE
+   ========================================================= */
 
 .bubble {
     position: relative;
 
-    width: min(90vw, 70rem);
-    height: 28rem;
+    width: min(46vw, 39rem);
+    height: min(46vw, 39rem);
 
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: flex-start;
+    min-width: 26rem;
+    min-height: 26rem;
 
-    gap: 1.5rem;
+    max-width: 39rem;
+    max-height: 39rem;
 
-    padding: 5rem 7rem;
     box-sizing: border-box;
 
-    background:
-        radial-gradient(
-            ellipse at 30% 20%,
-            rgba(255, 255, 255, 0.95) 0%,
-            rgba(255, 255, 255, 0.75) 25%,
-            rgba(255, 255, 255, 0.55) 60%,
-            rgba(245, 242, 255, 0.8) 100%
-        );
+    border-radius: 50%;
 
-    /* Wide bubble shape */
-    border-radius: 1%;
+    display: flex;
 
-    border: .15rem solid rgba(220, 214, 255, 0.9);
+    flex-wrap: wrap;
 
-    box-shadow:
-        inset 0 0 2rem rgba(117, 92, 255, 0.10),
-        inset 0 0 5rem rgba(117, 92, 255, 0.05),
-        0 1rem 2rem rgba(117, 92, 255, 0.12),
-        0 2rem 4rem rgba(117, 92, 255, 0.08);
+    align-content: center;
+    justify-content: center;
+
+    gap: clamp(.8rem, 1.8vw, 1.7rem);
+
+    padding: 13%;
 
     overflow: hidden;
 
-    animation: bubble-float 6s ease-in-out infinite;
+    background:
+        radial-gradient(
+            circle at 32% 22%,
+            rgba(255,255,255,.98) 0%,
+            rgba(255,255,255,.72) 28%,
+            rgba(247,245,255,.5) 62%,
+            rgba(229,225,255,.4) 100%
+        );
 
-    will-change: transform;
+    border: 2px solid rgba(213,207,250,.9);
+
+    box-shadow:
+        inset 0 0 2rem rgba(255,255,255,.95),
+        inset 0 -2.5rem 5rem rgba(105,82,230,.08),
+        0 1.5rem 3rem rgba(95,75,210,.13),
+        0 3rem 6rem rgba(95,75,210,.07);
+
+    animation: bubble-float 7s ease-in-out infinite;
+
+    isolation: isolate;
 }
 
 
-/* ---------- Bubble Highlight ---------- */
+/* Glass reflection */
+
+.bubble::before {
+    content: "";
+
+    position: absolute;
+
+    width: 45%;
+    height: 18%;
+
+    top: 7%;
+    left: 16%;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            110deg,
+            rgba(255,255,255,.95),
+            rgba(255,255,255,.15)
+        );
+
+    filter: blur(.45rem);
+
+    transform: rotate(-20deg);
+
+    pointer-events: none;
+
+    z-index: 1;
+}
 
 
-
-/* ---------- Bubble Glow ---------- */
+/* Interior glow */
 
 .bubble::after {
     content: "";
@@ -120,70 +322,607 @@
 
     inset: 0;
 
+    border-radius: 50%;
+
     background:
         radial-gradient(
-            circle at 75% 80%,
-            rgba(117, 92, 255, 0.08),
-            transparent 35%
+            circle at 80% 78%,
+            rgba(105,82,230,.1),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 12% 72%,
+            rgba(255,120,220,.07),
+            transparent 28%
         );
 
     pointer-events: none;
+
+    z-index: 1;
+}
+
+/* 1–6 teams */
+
+.bubble.small-bubble {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.bubble.small-bubble .logo-wrapper {
+    width: 5.5rem;
+    height: 5.5rem;
 }
 
 
-/* ---------- Floating Animation ---------- */
+/* 7–12 teams */
+
+.bubble.medium-bubble {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.bubble.medium-bubble .logo-wrapper {
+    width: 4.5rem;
+    height: 4.5rem;
+}
+
+
+/* 13+ teams */
+
+.bubble.large-bubble {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.bubble.large-bubble .logo-wrapper {
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+
+/* =========================================================
+   LOGOS
+   ========================================================= */
+
+.logo-wrapper {
+    position: relative;
+
+    width: clamp(4.5rem, 7vw, 6.5rem);
+    height: clamp(4.5rem, 7vw, 6.5rem);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 3;
+
+    transition:
+        transform .25s ease,
+        filter .25s ease;
+}
+
+.logo {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 .3rem .35rem rgba(0,0,0,.12)
+        );
+
+    transition: transform .25s ease;
+}
+
+.logo-wrapper:hover {
+    transform: scale(1.12);
+
+    z-index: 5;
+}
+
+
+/* =========================================================
+   EMPTY BUBBLE
+   ========================================================= */
+
+.empty-bubble {
+    position: relative;
+
+    z-index: 3;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: .6rem;
+
+    color: #989db0;
+
+    font-size: .9rem;
+}
+
+.empty-bubble mat-icon {
+    width: 3rem;
+    height: 3rem;
+
+    font-size: 3rem;
+
+    color: #a9a0ed;
+}
+
+
+/* =========================================================
+   COUNTER
+   ========================================================= */
+
+.counter {
+    margin-top: 1rem;
+
+    padding: .7rem 1.4rem;
+
+    display: flex;
+    align-items: center;
+
+    gap: .4rem;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.9);
+
+    box-shadow:
+        0 .5rem 1.5rem rgba(60,50,140,.08);
+
+    color: #626a81;
+
+    font-size: .85rem;
+}
+
+.counter strong {
+    color: #6046e8;
+
+    font-size: 1rem;
+}
+
+
+/* =========================================================
+   RIGHT PANEL
+   ========================================================= */
+
+.builder-panel {
+    width: 100%;
+
+    /* height: calc(100vh - 5rem); */
+    max-height: 48rem;
+    min-height: 36rem;
+
+    box-sizing: border-box;
+
+    padding: 1.75rem;
+
+    background: rgba(255, 255, 255, .94);
+
+    border: 1px solid rgba(226, 223, 244, .9);
+
+    border-radius: 1.5rem;
+
+    box-shadow:
+        0 1.25rem 3rem rgba(65, 55, 145, .1);
+
+    backdrop-filter: blur(20px);
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   PANEL HEADER
+   ========================================================= */
+
+.panel-kicker {
+    display: block;
+
+    margin-bottom: .35rem;
+
+    color: #705de0;
+
+    font-size: .68rem;
+
+    font-weight: 800;
+
+    letter-spacing: .13em;
+}
+
+.panel-header h2 {
+    margin: 0;
+
+    font-size: 1.5rem;
+
+    font-weight: 800;
+}
+
+.panel-header p {
+    margin: .45rem 0 1.4rem;
+
+    color: #81899e;
+
+    font-size: .82rem;
+
+    line-height: 1.5;
+}
+
+.panel-header {
+    flex-shrink: 0;
+}
+
+.team-search {
+    flex-shrink: 0;
+}
+
+.selected-section {
+    display: flex;
+    flex-direction: column;
+
+    /*
+     * This is important because the team list
+     * needs to be allowed to shrink.
+     */
+    min-height: 0;
+
+    flex: 1;
+}
+
+.selected-header {
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   TEAM SEARCH
+   ========================================================= */
+
+.team-search {
+    width: 100%;
+
+    margin-bottom: 1.25rem;
+}
+
+
+/* =========================================================
+   SELECTED TEAMS
+   ========================================================= */
+
+.selected-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: .7rem;
+
+    border-bottom: 1px solid #eeeef4;
+}
+
+.selected-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: .55rem;
+
+    font-size: .85rem;
+
+    font-weight: 700;
+}
+
+.section-number {
+    width: 1.6rem;
+    height: 1.6rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eeeaff;
+
+    color: #6046e8;
+
+    font-size: .7rem;
+}
+
+.clear-button {
+    min-width: 0 !important;
+
+    padding: 0 .4rem !important;
+
+    color: #858ca0 !important;
+
+    font-size: .75rem !important;
+}
+
+
+/* =========================================================
+   TEAM LIST
+   ========================================================= */
+
+.team-list {
+    /*
+     * This is the critical part.
+     * It takes whatever vertical space is LEFT
+     * after the other sections have been rendered.
+     */
+    flex: 1 1 auto;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    margin-bottom: 1.25rem;
+
+    padding-right: .25rem;
+}
+
+.team-row {
+    min-height: 3rem;
+
+    display: flex;
+    align-items: center;
+
+    gap: .7rem;
+
+    border-bottom: 1px solid #f1f1f5;
+}
+
+.team-row img {
+    width: 2rem;
+    height: 2rem;
+
+    object-fit: contain;
+}
+
+.team-row span {
+    flex: 1;
+
+    font-size: .82rem;
+
+    font-weight: 600;
+}
+
+.remove-button {
+    color: #9298aa !important;
+}
+
+.remove-button:hover {
+    color: #d9535f !important;
+
+    background: #fff1f2 !important;
+}
+
+
+/* Empty list */
+
+.empty-list {
+    height: 7rem;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: .5rem;
+
+    color: #a1a7b7;
+
+    font-size: .75rem;
+}
+
+.empty-list mat-icon {
+    color: #b2a9ef;
+}
+
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.panel-divider {
+    height: 1px;
+
+    margin: 1.25rem 0;
+
+    background: #eeeef4;
+}
+
+
+/* =========================================================
+   SUBMIT SECTION
+   ========================================================= */
+
+.submit-section h3 {
+    margin: 0;
+
+    font-size: 1rem;
+
+    font-weight: 750;
+}
+
+.submit-section {
+    flex-shrink: 0;
+}
+
+.lock-description {
+    margin: .35rem 0 1rem;
+
+    color: #8a91a4;
+
+    font-size: .75rem;
+}
+
+
+/* Make name/email compact */
+
+.submit-section mat-form-field {
+    width: 100%;
+
+    margin-bottom: .25rem;
+}
+
+
+.submit-button {
+    width: 100%;
+
+    height: 3.25rem;
+
+    margin-top: .35rem;
+
+    border-radius: .8rem !important;
+
+    font-weight: 700;
+
+    font-size: .9rem;
+}
+
+
+/* =========================================================
+   BUBBLE ANIMATION
+   ========================================================= */
 
 @keyframes bubble-float {
-    0% {
-        transform: translate(0, 0) rotate(0deg);
-    }
 
-    25% {
-        transform: translate(0.35rem, -0.6rem) rotate(0.2deg);
+    0% {
+        transform: translateY(0);
     }
 
     50% {
-        transform: translate(-0.25rem, -1rem) rotate(-0.2deg);
-    }
-
-    75% {
-        transform: translate(-0.4rem, -0.4rem) rotate(0.15deg);
+        transform: translateY(-8px);
     }
 
     100% {
-        transform: translate(0, 0) rotate(0deg);
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .main-content {
+        grid-template-columns: 1fr;
+
+        gap: 2rem;
+
+        padding: 2rem 0;
+    }
+
+    .bubble {
+        width: min(75vw, 38rem);
+        height: min(75vw, 38rem);
+    }
+
+    .builder-panel {
+        max-width: 38rem;
+
+        margin: 0 auto;
+
+        /*
+         * Let the page grow naturally on smaller screens.
+         */
+        max-height: none;
+
+        overflow: visible;
+    }
+
+    .team-list {
+        max-height: 18rem;
     }
 }
 
-/* ---------- Logos ---------- */
 
-.logo {
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
-    width: 4rem;
-    height: 4rem;
+@media (max-width: 700px) {
 
-    transition: .2s;
+    .page {
+        padding: .75rem;
+    }
 
-}
+    .navbar {
+        height: auto;
 
-.logo:hover {
+        padding: .75rem;
 
-    transform: scale(1.15);
+        flex-direction: column;
 
-}
+        gap: .75rem;
+    }
 
-/* ---------- Counter ---------- */
+    .nav-links {
+        width: 100%;
 
-.counter {
+        overflow-x: auto;
+    }
 
-    background: white;
+    .nav-link {
+        flex: 1;
 
-    padding: 1rem 2rem;
+        justify-content: center;
 
-    border-radius: 999rem;
+        padding: 0 .5rem;
 
-    font-weight: 600;
+        font-size: .7rem;
+    }
 
-    box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.08);
+    .nav-link mat-icon {
+        display: none;
+    }
+
+    .main-content {
+        min-height: auto;
+
+        padding-top: 1rem;
+    }
+
+    .hero {
+        margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: .85rem;
+    }
+
+    .bubble {
+        width: 88vw;
+        height: 88vw;
+
+        min-width: 0;
+        min-height: 0;
+
+        padding: 10%;
+
+        gap: .4rem;
+    }
+
+    .logo-wrapper {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
+    .builder-panel {
+        padding: 1.25rem;
+    }
 
 }
