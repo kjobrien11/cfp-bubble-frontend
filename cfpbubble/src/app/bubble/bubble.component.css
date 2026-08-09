@@ -1,22 +1,189 @@
-.input-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-  width: 100%;
-  padding: 2rem;
-  background-color: #f1f5f9;
-  border-radius: 1rem;
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem;
+    gap: 2rem;
+    background: #fafcff;
+    min-height: 100vh;
 }
 
-mat-form-field {
-  width: 15.625rem;
+.hero {
+    text-align: center;
 }
 
-button {
-  height: 3.5rem;
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: .5rem;
+    font-weight: 700;
 }
 
-img{
-    max-height: 200px;
+.hero p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* ---------- Controls ---------- */
+
+.controls {
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 2rem;
+
+    width: min(90%, 75rem);
+
+    background: white;
+
+    border-radius: 1.5rem;
+
+    box-shadow:
+        0 1rem 2rem rgba(89,82,255,.08);
+
+}
+
+.controls mat-form-field {
+
+    flex: 1;
+
+}
+
+.controls button:last-child {
+
+    height: 3.5rem;
+    padding-inline: 2rem;
+
+}
+
+/* ---------- Bubble ---------- */
+
+/* ---------- Bubble ---------- */
+
+/* ---------- Bubble ---------- */
+
+.bubble {
+    position: relative;
+
+    width: min(90vw, 70rem);
+    height: 28rem;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+
+    gap: 1.5rem;
+
+    padding: 5rem 7rem;
+    box-sizing: border-box;
+
+    background:
+        radial-gradient(
+            ellipse at 30% 20%,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(255, 255, 255, 0.75) 25%,
+            rgba(255, 255, 255, 0.55) 60%,
+            rgba(245, 242, 255, 0.8) 100%
+        );
+
+    /* Wide bubble shape */
+    border-radius: 1%;
+
+    border: .15rem solid rgba(220, 214, 255, 0.9);
+
+    box-shadow:
+        inset 0 0 2rem rgba(117, 92, 255, 0.10),
+        inset 0 0 5rem rgba(117, 92, 255, 0.05),
+        0 1rem 2rem rgba(117, 92, 255, 0.12),
+        0 2rem 4rem rgba(117, 92, 255, 0.08);
+
+    overflow: hidden;
+
+    animation: bubble-float 6s ease-in-out infinite;
+
+    will-change: transform;
+}
+
+
+/* ---------- Bubble Highlight ---------- */
+
+
+
+/* ---------- Bubble Glow ---------- */
+
+.bubble::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 75% 80%,
+            rgba(117, 92, 255, 0.08),
+            transparent 35%
+        );
+
+    pointer-events: none;
+}
+
+
+/* ---------- Floating Animation ---------- */
+
+@keyframes bubble-float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(0.35rem, -0.6rem) rotate(0.2deg);
+    }
+
+    50% {
+        transform: translate(-0.25rem, -1rem) rotate(-0.2deg);
+    }
+
+    75% {
+        transform: translate(-0.4rem, -0.4rem) rotate(0.15deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+
+/* ---------- Logos ---------- */
+
+.logo {
+
+    width: 4rem;
+    height: 4rem;
+
+    transition: .2s;
+
+}
+
+.logo:hover {
+
+    transform: scale(1.15);
+
+}
+
+/* ---------- Counter ---------- */
+
+.counter {
+
+    background: white;
+
+    padding: 1rem 2rem;
+
+    border-radius: 999rem;
+
+    font-weight: 600;
+
+    box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.08);
+
 }

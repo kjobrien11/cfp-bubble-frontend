@@ -1,49 +1,89 @@
-<div class="input-row">
-    <mat-form-field>
-        <mat-label>Add a Team...</mat-label>
+<div class="page">
 
-        <input 
-            type="text"
-            matInput
-            placeholder="Search for a team"
-            [formControl]="myControl"
-            [matAutocomplete]="auto">
+  <div class="hero">
+    <h1>🏆 CFP Bubble Game</h1>
+    <p>
+      Pick the smallest group of teams that contains
+      the eventual CFP Champion.
+    </p>
+  </div>
 
-        <mat-autocomplete 
-            #auto="matAutocomplete"
-            [displayWith]="displayTeam"
-            (optionSelected)="onTeamSelected($event)">
+  <div class="controls">
 
-            @for (team of filteredTeams | async; track team.espnId) {
-                <mat-option [value]="team">
-                    {{ team.schoolName }}
-                </mat-option>
-            }
+    <mat-form-field appearance="outline">
+      <mat-label>Add a Team</mat-label>
 
-        </mat-autocomplete>
+      <input
+        matInput
+        placeholder="Search teams..."
+        [formControl]="myControl"
+        [matAutocomplete]="auto">
+
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="displayTeam"
+        (optionSelected)="onTeamSelected($event)">
+
+        @for (team of filteredTeams | async; track team.espnId) {
+          <mat-option [value]="team">
+            {{team.schoolName}}
+          </mat-option>
+        }
+
+      </mat-autocomplete>
+
     </mat-form-field>
 
-    <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput [(ngModel)]="name">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="name">
     </mat-form-field>
 
-    <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input matInput [(ngModel)]="email" type="email">
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        type="email"
+        [(ngModel)]="email">
     </mat-form-field>
 
-    <button mat-fab (click)="clear()">
-        <mat-icon>delete</mat-icon>
+    <button
+      mat-icon-button
+      color="warn"
+      (click)="clear()">
+
+      <mat-icon>delete</mat-icon>
+
     </button>
 
-    <button mat-fab extended (click)="submit()">
-        <mat-icon>check</mat-icon>
-        Submit
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="submit()">
+
+      <mat-icon>check</mat-icon>
+      Submit Bubble
+
     </button>
+
+  </div>
+
+  <div class="bubble">
+    @for (team of selectedTeams; track team.espnId) {
+
+      <img
+        class="logo"
+        [src]="'https://a.espncdn.com/i/teamlogos/ncaa/500/' + team.espnId + '.png'"
+        [alt]="team.schoolName">
+
+    }
+
+  </div>
+
+  <div class="counter">
+
+    {{selectedTeams.length}} Teams in your bubble
+
+  </div>
+
 </div>
-
-   
-@for (team of selectedTeams; track team.espnId) {
-<img [src]="'https://a.espncdn.com/i/teamlogos/ncaa/500/' + team.espnId + '.png'" [alt]="team.schoolName + ' logo'">
-}
