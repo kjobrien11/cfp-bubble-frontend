@@ -140,7 +140,7 @@
         minmax(0, 1fr)
         25rem;
 
-    gap: 4rem;
+    gap: 2rem;
 
     align-items: center;
 
@@ -149,7 +149,7 @@
      * the navbar instead of vertically centering
      * based on the panel's content.
      */
-    padding: 3rem 0;
+    padding: 1rem 0;
 
     box-sizing: border-box;
 }
