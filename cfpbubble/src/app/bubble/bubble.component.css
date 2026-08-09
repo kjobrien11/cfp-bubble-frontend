@@ -585,7 +585,7 @@
 .team-search {
     width: 100%;
 
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.25rem;
 }
 
 
@@ -655,12 +655,12 @@
      * after the other sections have been rendered.
      */
     flex: 1 1 auto;
+    height: 10rem;
 
     min-height: 0;
 
     overflow-y: auto;
 
-    margin-bottom: 1.25rem;
 
     padding-right: .25rem;
 }
