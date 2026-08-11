@@ -8,7 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 import { TeamService } from '../services/team.service';
-import { Team } from '../dtos/Team';
+import { Team } from '../dtos/team';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { BubbleService } from '../services/bubble.service';
@@ -82,7 +82,7 @@ export class BubbleComponent implements OnInit {
 
     // Prevent duplicates
     if (!this.selectedTeams.some(t => t.espnId === team.espnId)) {
-      this.selectedTeams.push(team);
+      this.selectedTeams.unshift(team);
     }
 
     console.log(this.selectedTeams);

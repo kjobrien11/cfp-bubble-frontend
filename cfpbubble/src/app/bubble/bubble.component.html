@@ -1,40 +1,5 @@
 <div class="page">
 
-  <!-- Top Navigation -->
-  <nav class="navbar">
-
-    <div class="brand">
-      <span class="brand-icon">🏆</span>
-      <span>CFP Bubble Game</span>
-    </div>
-
-    <div class="nav-links">
-
-      <button class="nav-link active">
-        <mat-icon>add_circle</mat-icon>
-        Create Bubble
-      </button>
-
-      <button class="nav-link">
-        <mat-icon>emoji_events</mat-icon>
-        Leaderboard
-      </button>
-
-      <button class="nav-link">
-        <mat-icon>groups</mat-icon>
-        Groups
-      </button>
-
-      <button class="nav-link">
-        <mat-icon>folder</mat-icon>
-        My Bubbles
-      </button>
-
-    </div>
-
-  </nav>
-
-
   <!-- Main Content -->
   <main class="main-content">
 
@@ -299,6 +264,7 @@
           mat-flat-button
           color="primary"
           class="submit-button"
+          [disabled]="!name?.trim() || !email?.trim() || selectedTeams.length === 0"
           (click)="submit()">
 
           <mat-icon>lock</mat-icon>
