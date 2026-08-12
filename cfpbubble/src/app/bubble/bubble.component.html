@@ -55,44 +55,48 @@
       </div>
 
 
-      <!-- Search -->
       <mat-form-field
-        appearance="outline"
-        class="team-search">
+  appearance="outline"
+  class="team-search">
 
-        <mat-label>Search teams</mat-label>
+  <mat-label>Search teams</mat-label>
 
-        <mat-icon matPrefix>
-          search
-        </mat-icon>
+  <mat-icon matPrefix>
+    search
+  </mat-icon>
 
-        <input
-          matInput
-          placeholder="Search for a team..."
-          [formControl]="myControl"
-          [matAutocomplete]="auto">
+  <input
+    matInput
+    placeholder="Search for a team..."
+    [formControl]="myControl"
+    [matAutocomplete]="auto"
+    [disabled]="selectedTeams.length >= 20">
 
-        <mat-autocomplete
-          #auto="matAutocomplete"
-          [displayWith]="displayTeam"
-          (optionSelected)="onTeamSelected($event)">
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    [displayWith]="displayTeam"
+    (optionSelected)="onTeamSelected($event)">
 
-          @for (
-            team of filteredTeams | async;
-            track team.espnId
-          ) {
+    @for (
+      team of filteredTeams | async;
+      track team.espnId
+    ) {
 
-            <mat-option [value]="team">
+      <mat-option [value]="team">
+        {{ team.schoolName }}
+      </mat-option>
 
-              {{ team.schoolName }}
+    }
 
-            </mat-option>
+  </mat-autocomplete>
 
-          }
+</mat-form-field>
 
-        </mat-autocomplete>
-
-      </mat-form-field>
+@if (selectedTeams.length >= 20) {
+  <div class="max-teams-message">
+    Maximum of 20 teams reached.
+  </div>
+}
 
 
       <!-- Selected Teams -->

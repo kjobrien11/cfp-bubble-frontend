@@ -1,8 +1,10 @@
 <div
   class="bubble"
-  [class.small-bubble]="teams.length <= 6"
-  [class.medium-bubble]="teams.length > 6 && teams.length <= 10"
-  [class.large-bubble]="teams.length > 12"
+  [class.extra-small-bubble]="teams.length <= 3"
+  [class.small-bubble]="teams.length > 3 && teams.length <= 6"
+  [class.medium-bubble]="teams.length > 6 && teams.length <= 9"
+  [class.large-bubble]="teams.length > 9 && teams.length > 12"
+  [class.extra-large-bubble]="teams.length >14"
 >
   @for (team of teams; track team.espnId) {
 

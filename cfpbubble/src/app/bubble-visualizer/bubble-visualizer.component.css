@@ -175,6 +175,10 @@ TEAM LOGOS
 1–6 TEAMS
 ========================================================= */
 
+.bubble.extra-small-bubble .logo-wrapper {
+    width: 40%;
+    height: 40%;
+}
 /* 1–6 teams */
 .bubble.small-bubble .logo-wrapper {
     width: 30%;
@@ -191,6 +195,11 @@ TEAM LOGOS
 .bubble.large-bubble .logo-wrapper {
     width: 15%;
     height: 15%;
+}
+
+.bubble.extra-large-bubble .logo-wrapper {
+    width: 10%;
+    height: 10%;
 }
 
 

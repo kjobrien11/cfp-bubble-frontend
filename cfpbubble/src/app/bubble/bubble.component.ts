@@ -79,23 +79,33 @@ export class BubbleComponent implements OnInit {
     return team ? team.schoolName : '';
   }
 
-  onTeamSelected(event: MatAutocompleteSelectedEvent): void {
-    const team = event.option.value as Team;
+onTeamSelected(event: MatAutocompleteSelectedEvent): void {
+  const team = event.option.value as Team;
 
-    // Prevent duplicates
-    if (!this.selectedTeams.some(t => t.espnId === team.espnId)) {
-      this.selectedTeams.unshift(team);
-    }
-
-    console.log(this.selectedTeams);
-
-    // Clear the search box
-    this.myControl.setValue(null);
+  if (
+    this.selectedTeams.length < 20 &&
+    !this.selectedTeams.some(t => t.espnId === team.espnId)
+  ) {
+    this.selectedTeams.unshift(team);
   }
 
-  clear(): void{
-    this.selectedTeams = [];
+  this.myControl.setValue(null);
+
+  this.updateSearchState();
+}
+
+private updateSearchState(): void {
+  if (this.selectedTeams.length >= 20) {
+    this.myControl.disable();
+  } else {
+    this.myControl.enable();
   }
+}
+
+clear(): void {
+  this.selectedTeams = [];
+  this.updateSearchState();
+}
 
   submit() {
     const request: BubbleRequest = {
@@ -115,9 +125,11 @@ export class BubbleComponent implements OnInit {
       });
   }
 
-  removeTeam(team: Team) {
+removeTeam(team: Team): void {
   this.selectedTeams = this.selectedTeams.filter(
     t => t.espnId !== team.espnId
   );
+
+  this.updateSearchState();
 }
 }
