@@ -1,10 +1,9 @@
 /* =========================================================
-   PAGE
-   ========================================================= */
+PAGE
+========================================================= */
 
 .page {
     min-height: 100vh;
-
     box-sizing: border-box;
 
     padding: 1rem 1.5rem 2rem;
@@ -24,9 +23,10 @@
     color: #17213d;
 }
 
+
 /* =========================================================
-   MAIN LAYOUT
-   ========================================================= */
+MAIN LAYOUT
+========================================================= */
 
 .main-content {
     width: min(100%, 95rem);
@@ -43,11 +43,6 @@
 
     align-items: center;
 
-    /*
-     * Leave a defined amount of space below
-     * the navbar instead of vertically centering
-     * based on the panel's content.
-     */
     padding: 1rem 0;
 
     box-sizing: border-box;
@@ -55,123 +50,92 @@
 
 
 /* =========================================================
-   LEFT SIDE
-   ========================================================= */
+LEFT SIDE
+========================================================= */
 
 .bubble-area {
     display: flex;
     flex-direction: column;
 
-    padding-top: 2rem;
     align-items: center;
     justify-content: center;
 
     min-width: 0;
+
+    padding-top: 2rem;
 }
 
 
 /* =========================================================
-   HERO
-   ========================================================= */
+HERO
+========================================================= */
 
 .hero {
-    text-align: center;
+    width: 100%;
+    max-width: 42rem;
 
     margin-bottom: 1.5rem;
 
-    max-width: 42rem;
+    text-align: center;
 }
 
 .hero h1 {
     margin: 0;
 
-    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    color: #18213b;
 
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
     font-weight: 800;
 
     letter-spacing: -.045em;
-
-    color: #18213b;
 }
 
 .hero p {
-    margin: .7rem auto 0;
-
     max-width: 36rem;
+
+    margin: .7rem auto 0;
 
     color: #747d94;
 
     font-size: 1rem;
-
     line-height: 1.6;
 }
 
 
+/* =========================================================
+BUBBLE CONTAINER
+The page controls the visualizer's size.
+========================================================= */
+
+.bubble-container {
+    width: min(46vw, 39rem);
+    height: min(46vw, 39rem);
+
+    aspect-ratio: 1 / 1;
+
+    flex-shrink: 0;
+}
 
 
 /* =========================================================
-   LOGOS
-   ========================================================= */
-
-.logo-wrapper {
-    position: relative;
-
-    width: clamp(4.5rem, 7vw, 6.5rem);
-    height: clamp(4.5rem, 7vw, 6.5rem);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    z-index: 3;
-
-    transition:
-        transform .25s ease,
-        filter .25s ease;
-}
-
-.logo {
-    width: 100%;
-    height: 100%;
-
-    object-fit: contain;
-
-    filter:
-        drop-shadow(
-            0 .3rem .35rem rgba(0,0,0,.12)
-        );
-
-    transition: transform .25s ease;
-}
-
-.logo-wrapper:hover {
-    transform: scale(1.12);
-
-    z-index: 5;
-}
-
-
-
-/* =========================================================
-   COUNTER
-   ========================================================= */
+COUNTER
+========================================================= */
 
 .counter {
-    margin-top: 1rem;
-
-    padding: .7rem 1.4rem;
-
     display: flex;
     align-items: center;
 
     gap: .4rem;
 
+    margin-top: 1rem;
+    padding: .7rem 1.4rem;
+
     border-radius: 999px;
 
-    background: rgba(255,255,255,.9);
+    background: rgba(255, 255, 255, .9);
 
     box-shadow:
-        0 .5rem 1.5rem rgba(60,50,140,.08);
+        0 .5rem 1.5rem rgba(60, 50, 140, .08);
 
     color: #626a81;
 
@@ -180,19 +144,17 @@
 
 .counter strong {
     color: #6046e8;
-
     font-size: 1rem;
 }
 
 
 /* =========================================================
-   RIGHT PANEL
-   ========================================================= */
+RIGHT PANEL
+========================================================= */
 
 .builder-panel {
     width: 100%;
 
-    /* height: calc(100vh - 5rem); */
     max-height: 48rem;
     min-height: 36rem;
 
@@ -219,8 +181,12 @@
 
 
 /* =========================================================
-   PANEL HEADER
-   ========================================================= */
+PANEL HEADER
+========================================================= */
+
+.panel-header {
+    flex-shrink: 0;
+}
 
 .panel-kicker {
     display: block;
@@ -230,7 +196,6 @@
     color: #705de0;
 
     font-size: .68rem;
-
     font-weight: 800;
 
     letter-spacing: .13em;
@@ -240,7 +205,6 @@
     margin: 0;
 
     font-size: 1.5rem;
-
     font-weight: 800;
 }
 
@@ -250,56 +214,42 @@
     color: #81899e;
 
     font-size: .82rem;
-
     line-height: 1.5;
 }
 
-.panel-header {
-    flex-shrink: 0;
-}
+
+/* =========================================================
+TEAM SEARCH
+========================================================= */
 
 .team-search {
+    width: 100%;
+
     flex-shrink: 0;
+
+    margin-bottom: .25rem;
 }
+
+
+/* =========================================================
+SELECTED TEAMS
+========================================================= */
 
 .selected-section {
     display: flex;
     flex-direction: column;
 
-    /*
-     * This is important because the team list
-     * needs to be allowed to shrink.
-     */
     min-height: 0;
 
     flex: 1;
 }
 
 .selected-header {
-    flex-shrink: 0;
-}
-
-
-/* =========================================================
-   TEAM SEARCH
-   ========================================================= */
-
-.team-search {
-    width: 100%;
-
-    margin-bottom: 0.25rem;
-}
-
-
-/* =========================================================
-   SELECTED TEAMS
-   ========================================================= */
-
-.selected-header {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
+
+    flex-shrink: 0;
 
     padding-bottom: .7rem;
 
@@ -308,13 +258,11 @@
 
 .selected-title {
     display: flex;
-
     align-items: center;
 
     gap: .55rem;
 
     font-size: .85rem;
-
     font-weight: 700;
 }
 
@@ -347,22 +295,17 @@
 
 
 /* =========================================================
-   TEAM LIST
-   ========================================================= */
+TEAM LIST
+========================================================= */
 
 .team-list {
-    /*
-     * This is the critical part.
-     * It takes whatever vertical space is LEFT
-     * after the other sections have been rendered.
-     */
     flex: 1 1 auto;
-    height: 10rem;
 
     min-height: 0;
 
-    overflow-y: auto;
+    height: 10rem;
 
+    overflow-y: auto;
 
     padding-right: .25rem;
 }
@@ -383,14 +326,21 @@
     height: 2rem;
 
     object-fit: contain;
+
+    flex-shrink: 0;
 }
 
 .team-row span {
+    min-width: 0;
+
     flex: 1;
 
     font-size: .82rem;
-
     font-weight: 600;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .remove-button {
@@ -399,12 +349,13 @@
 
 .remove-button:hover {
     color: #d9535f !important;
-
     background: #fff1f2 !important;
 }
 
 
-/* Empty list */
+/* =========================================================
+EMPTY LIST
+========================================================= */
 
 .empty-list {
     height: 7rem;
@@ -428,32 +379,33 @@
 
 
 /* =========================================================
-   DIVIDER
-   ========================================================= */
+DIVIDER
+========================================================= */
 
 .panel-divider {
     height: 1px;
 
     margin: 1.25rem 0;
 
+    flex-shrink: 0;
+
     background: #eeeef4;
 }
 
 
 /* =========================================================
-   SUBMIT SECTION
-   ========================================================= */
+SUBMIT SECTION
+========================================================= */
+
+.submit-section {
+    flex-shrink: 0;
+}
 
 .submit-section h3 {
     margin: 0;
 
     font-size: 1rem;
-
     font-weight: 750;
-}
-
-.submit-section {
-    flex-shrink: 0;
 }
 
 .lock-description {
@@ -464,15 +416,11 @@
     font-size: .75rem;
 }
 
-
-/* Make name/email compact */
-
 .submit-section mat-form-field {
     width: 100%;
 
     margin-bottom: .25rem;
 }
-
 
 .submit-button {
     width: 100%;
@@ -483,168 +431,28 @@
 
     border-radius: .8rem !important;
 
-    font-weight: 700;
-
     font-size: .9rem;
-}
-
-.bubble-container {
-    width: min(46vw, 39rem);
-    height: min(46vw, 39rem);
-}
-
-/* =========================================================
-   BUBBLE ANIMATION
-   ========================================================= */
-
-@keyframes bubble-float {
-
-    0% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-8px);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
-
+    font-weight: 700;
 }
 
 
 /* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 1000px) {
-
-    .main-content {
-        grid-template-columns: 1fr;
-
-        gap: 2rem;
-
-        padding: 2rem 0;
-    }
-
-    .bubble {
-        width: min(75vw, 38rem);
-        height: min(75vw, 38rem);
-    }
-
-    .builder-panel {
-        max-width: 38rem;
-
-        margin: 0 auto;
-
-        /*
-         * Let the page grow naturally on smaller screens.
-         */
-        max-height: none;
-
-        overflow: visible;
-    }
-
-    .team-list {
-        max-height: 18rem;
-    }
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 700px) {
-
-    .page {
-        padding: .75rem;
-    }
-
-    .navbar {
-        height: auto;
-
-        padding: .75rem;
-
-        flex-direction: column;
-
-        gap: .75rem;
-    }
-
-    .nav-links {
-        width: 100%;
-
-        overflow-x: auto;
-    }
-
-    .nav-link {
-        flex: 1;
-
-        justify-content: center;
-
-        padding: 0 .5rem;
-
-        font-size: .7rem;
-    }
-
-    .nav-link mat-icon {
-        display: none;
-    }
-
-    .main-content {
-        min-height: auto;
-
-        padding-top: 1rem;
-    }
-
-    .hero {
-        margin-bottom: 1rem;
-    }
-
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .hero p {
-        font-size: .85rem;
-    }
-
-    .bubble {
-        width: 88vw;
-        height: 88vw;
-
-        min-width: 0;
-        min-height: 0;
-
-        padding: 10%;
-
-        gap: .4rem;
-    }
-
-    .logo-wrapper {
-        width: 3.5rem;
-        height: 3.5rem;
-    }
-
-    .builder-panel {
-        padding: 1.25rem;
-    }
-
-}
+MAX TEAMS MESSAGE
+========================================================= */
 
 .max-teams-message {
     display: flex;
     align-items: center;
+
     gap: .45rem;
 
     margin: -.15rem 0 .75rem;
     padding: .6rem .75rem;
 
+    border: 1px solid #e5defc;
     border-radius: .65rem;
 
     background: #f5f2ff;
-    border: 1px solid #e5defc;
 
     color: #6b59c7;
 
@@ -673,4 +481,166 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+
+/* =========================================================
+TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .page {
+        padding: 1rem 1.25rem 2rem;
+    }
+
+    .main-content {
+        grid-template-columns: 1fr;
+
+        gap: 2rem;
+
+        padding: 2rem 0;
+    }
+
+    .bubble-area {
+        padding-top: 0;
+    }
+
+    .bubble-container {
+        width: min(75vw, 38rem);
+        height: min(75vw, 38rem);
+    }
+
+    .builder-panel {
+        width: 100%;
+        max-width: 38rem;
+
+        min-height: auto;
+        max-height: none;
+
+        margin: 0 auto;
+
+        overflow: visible;
+    }
+
+    .team-list {
+        max-height: 18rem;
+    }
+
+}
+
+
+/* =========================================================
+MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .page {
+        padding: .75rem;
+    }
+
+    .main-content {
+        width: 100%;
+
+        gap: 1.5rem;
+
+        padding-top: 1rem;
+    }
+
+    .bubble-area {
+        width: 100%;
+    }
+
+    .hero {
+        margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+        font-size: clamp(1.8rem, 8vw, 2.2rem);
+    }
+
+    .hero p {
+        max-width: 30rem;
+
+        font-size: .85rem;
+    }
+
+    .bubble-container {
+        width: min(88vw, 28rem);
+        height: min(88vw, 28rem);
+    }
+
+    .counter {
+        margin-top: .75rem;
+
+        padding: .6rem 1.1rem;
+
+        font-size: .8rem;
+    }
+
+    .builder-panel {
+        padding: 1.25rem;
+
+        border-radius: 1.25rem;
+    }
+
+    .panel-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .panel-header p {
+        margin-bottom: 1rem;
+
+        font-size: .78rem;
+    }
+
+    .team-list {
+        max-height: 16rem;
+    }
+
+    .team-row {
+        min-height: 2.8rem;
+    }
+
+}
+
+
+/* =========================================================
+SMALL MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .page {
+        padding: .5rem;
+    }
+
+    .bubble-container {
+        width: 92vw;
+        height: 92vw;
+    }
+
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .hero p {
+        font-size: .8rem;
+    }
+
+    .builder-panel {
+        padding: 1rem;
+
+        border-radius: 1rem;
+    }
+
+    .selected-title {
+        font-size: .78rem;
+    }
+
+    .team-row span {
+        font-size: .78rem;
+    }
+
 }
