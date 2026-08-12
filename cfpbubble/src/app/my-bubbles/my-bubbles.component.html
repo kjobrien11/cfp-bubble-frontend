@@ -92,21 +92,63 @@
 
   <div class="bubble-results">
 
-  @for (bubble of bubbles; track bubble.publicId) {
+    @for (bubble of bubbles; track bubble.publicId) {
 
-    <div class="bubble-card">
+      <div class="bubble-card">
 
-      <div class="bubble-container">
-        <app-bubble-visualizer
-          [teams]="bubble.teams">
-        </app-bubble-visualizer>
+        <div class="bubble-container">
+          <app-bubble-visualizer
+            [teams]="bubble.teams">
+          </app-bubble-visualizer>
+        </div>
+
+        <div class="bubble-info">
+
+          <div class="bubble-header">
+            <h2>{{ bubble.name }}</h2>
+          </div>
+
+          <div class="bubble-details">
+
+            <div class="bubble-detail">
+              <mat-icon>confirmation_number</mat-icon>
+
+              <div>
+                <span class="detail-label">Bubble ID</span>
+                <span class="detail-value">{{ bubble.publicId }}</span>
+              </div>
+            </div>
+
+            <div class="bubble-detail">
+              <mat-icon>groups</mat-icon>
+
+              <div>
+                <span class="detail-label">Teams</span>
+                <span class="detail-value">{{ bubble.teams.length }}</span>
+              </div>
+            </div>
+
+            <div class="bubble-detail">
+              <mat-icon>schedule</mat-icon>
+
+              <div>
+                <span class="detail-label">Submitted</span>
+                <span class="detail-value">
+                  {{ bubble.submissionTime | date:'MMM d, yyyy h:mm a' }}
+                </span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
 
-    </div>
+    }
 
-  }
+  </div>
 
-</div>
 
 } @else if (searchEmail.trim()) {
 

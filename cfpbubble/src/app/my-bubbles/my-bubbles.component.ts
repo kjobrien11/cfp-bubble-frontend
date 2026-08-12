@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { BubbleService } from '../services/bubble.service';
 import { TeamService } from '../services/team.service';
 import { BubbleVisualizerComponent } from '../bubble-visualizer/bubble-visualizer.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-my-bubbles',
@@ -20,7 +21,8 @@ import { BubbleVisualizerComponent } from '../bubble-visualizer/bubble-visualize
     MatInputModule,
     MatIconModule,
     RouterModule,
-    BubbleVisualizerComponent
+    BubbleVisualizerComponent,
+    DatePipe
   ],
   templateUrl: './my-bubbles.component.html',
   styleUrl: './my-bubbles.component.css'
