@@ -172,6 +172,23 @@
     background: #e8e6ef;
 }
 
+.bubble-results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.bubble-card {
+    flex: 0 0 auto;
+}
+
+.bubble-container {
+    width: 18rem;
+    height: 18rem;
+}
 
 /* =========================================================
    SEARCH

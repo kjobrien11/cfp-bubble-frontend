@@ -488,6 +488,10 @@
     font-size: .9rem;
 }
 
+.bubble-container {
+    width: min(46vw, 39rem);
+    height: min(46vw, 39rem);
+}
 
 /* =========================================================
    BUBBLE ANIMATION
