@@ -5,6 +5,7 @@ PAGE
 .page {
     min-height: 100vh;
     box-sizing: border-box;
+    margin-top: -1rem;
 
     padding: 1rem 1.5rem 2rem;
 
