@@ -140,15 +140,16 @@ TEAM LOGOS
 
     flex-shrink: 0;
 
-    width: 18%;
-    height: 18%;
-
     z-index: 3;
 
     transition:
+        width .4s ease,
+        height .4s ease,
         transform .25s ease,
         filter .25s ease;
 }
+
+
 
 .logo {
     width: 100%;
@@ -171,32 +172,32 @@ TEAM LOGOS
 }
 
 
-/* =========================================================
-1–6 TEAMS
-========================================================= */
 
+/* 1–3 teams */
 .bubble.extra-small-bubble .logo-wrapper {
     width: 40%;
     height: 40%;
 }
-/* 1–6 teams */
+
+/* 4–6 teams */
 .bubble.small-bubble .logo-wrapper {
     width: 30%;
     height: 30%;
 }
 
-/* 7–12 teams */
+/* 7–9 teams */
 .bubble.medium-bubble .logo-wrapper {
     width: 20%;
     height: 20%;
 }
 
-/* 13+ teams */
+/* 10–14 teams */
 .bubble.large-bubble .logo-wrapper {
     width: 15%;
     height: 15%;
 }
 
+/* 15–20 teams */
 .bubble.extra-large-bubble .logo-wrapper {
     width: 10%;
     height: 10%;
