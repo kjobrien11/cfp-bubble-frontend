@@ -40,13 +40,11 @@ BUBBLE
     overflow: hidden;
 
     background:
-        radial-gradient(
-            circle at 32% 22%,
+        radial-gradient(circle at 32% 22%,
             rgba(255, 255, 255, .98) 0%,
             rgba(255, 255, 255, .72) 28%,
             rgba(247, 245, 255, .5) 62%,
-            rgba(229, 225, 255, .4) 100%
-        );
+            rgba(229, 225, 255, .4) 100%);
 
     border: 2px solid rgba(213, 207, 250, .9);
 
@@ -80,11 +78,9 @@ GLASS REFLECTION
     border-radius: 50%;
 
     background:
-        linear-gradient(
-            110deg,
+        linear-gradient(110deg,
             rgba(255, 255, 255, .95),
-            rgba(255, 255, 255, .15)
-        );
+            rgba(255, 255, 255, .15));
 
     filter: blur(.45rem);
 
@@ -110,16 +106,12 @@ INTERIOR GLOW
     border-radius: 50%;
 
     background:
-        radial-gradient(
-            circle at 80% 78%,
+        radial-gradient(circle at 80% 78%,
             rgba(105, 82, 230, .1),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 12% 72%,
+            transparent 30%),
+        radial-gradient(circle at 12% 72%,
             rgba(255, 120, 220, .07),
-            transparent 28%
-        );
+            transparent 28%);
 
     pointer-events: none;
 
@@ -158,9 +150,7 @@ TEAM LOGOS
     object-fit: contain;
 
     filter:
-        drop-shadow(
-            0 .3rem .35rem rgba(0, 0, 0, .12)
-        );
+        drop-shadow(0 .3rem .35rem rgba(0, 0, 0, .12));
 
     transition: transform .25s ease;
 }

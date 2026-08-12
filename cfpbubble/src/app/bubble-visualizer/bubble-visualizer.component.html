@@ -1,33 +1,27 @@
-<div
-  class="bubble"
-  [class.extra-small-bubble]="teams.length <= 3"
-  [class.small-bubble]="teams.length > 3 && teams.length <= 6"
-  [class.medium-bubble]="teams.length > 6 && teams.length <= 9"
-  [class.large-bubble]="teams.length > 9 && teams.length <= 14"
-  [class.extra-large-bubble]="teams.length > 14"
->
-  @for (team of teams; track team.espnId) {
+<div class="bubble" [class.extra-small-bubble]="teams.length <= 3"
+    [class.small-bubble]="teams.length > 3 && teams.length <= 6"
+    [class.medium-bubble]="teams.length > 6 && teams.length <= 9"
+    [class.large-bubble]="teams.length > 9 && teams.length <= 14" [class.extra-large-bubble]="teams.length > 14">
+    @for (team of teams; track team.espnId) {
 
     <div class="logo-wrapper">
 
-      <img
-        class="logo"
-        [src]="'https://a.espncdn.com/i/teamlogos/ncaa/500/' + team.espnId + '.png'"
-        [alt]="team.schoolName">
+        <img class="logo" [src]="'https://a.espncdn.com/i/teamlogos/ncaa/500/' + team.espnId + '.png'"
+            [alt]="team.schoolName">
 
     </div>
 
-  }
+    }
 
-  @if (teams.length === 0) {
+    @if (teams.length === 0) {
 
     <div class="empty-bubble">
 
-      <mat-icon>add_circle_outline</mat-icon>
+        <mat-icon>add_circle_outline</mat-icon>
 
-      <span>Start adding teams</span>
+        <span>Start adding teams</span>
 
     </div>
 
-  }
+    }
 </div>
