@@ -118,6 +118,15 @@ clear(): void {
       .subscribe({
         next: response => {
           console.log(response);
+          localStorage.setItem(
+          'cfpBubbleEmail',
+          this.email.trim()
+        );
+
+        console.log(
+          'Saved email:',
+          localStorage.getItem('cfpBubbleEmail')
+        );
         },
         error: err => {
           console.error(err);

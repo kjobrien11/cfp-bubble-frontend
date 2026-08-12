@@ -13,9 +13,13 @@ export class BubbleService {
 
   private apiUrl = '/bubbles';
 
-  createBubble(request: BubbleRequest): Observable<any> {
-    return this.http.post<any>(this.apiUrl + "/create", request);
-  }
+createBubble(request: BubbleRequest): Observable<string> {
+  return this.http.post(
+    this.apiUrl + '/create',
+    request,
+    { responseType: 'text' }
+  );
+}
 
   getBubblesByEmail(email:string): Observable<any[]>{
     return this.http.get<any>(this.apiUrl + "?email=" + email);

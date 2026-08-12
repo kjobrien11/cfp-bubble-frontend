@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -27,12 +27,21 @@ import { DatePipe } from '@angular/common';
   templateUrl: './my-bubbles.component.html',
   styleUrl: './my-bubbles.component.css'
 })
-export class MyBubblesComponent {
+export class MyBubblesComponent implements OnInit {
 
   searchEmail = '';
   bubbles: any[] = []
 
   constructor(private teamService: TeamService, private bubbleService: BubbleService) { }
+
+  ngOnInit(): void {
+    const savedEmail = localStorage.getItem('cfpBubbleEmail');
+
+    if (savedEmail) {
+      this.searchEmail = savedEmail;
+      this.searchBubbles();
+    }
+  }
 
   searchBubbles(): void {
 
