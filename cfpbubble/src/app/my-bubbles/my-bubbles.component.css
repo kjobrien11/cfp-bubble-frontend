@@ -1,0 +1,322 @@
+/* =========================================================
+   BUBBLE ACTIONS
+   ========================================================= */
+
+.bubble-actions {
+
+    margin: 0 auto;
+
+    min-height: 8.5rem;
+
+    padding: 1.25rem 2rem;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+
+    background: rgba(255, 255, 255, .94);
+
+    border: 1px solid rgba(226, 223, 244, .9);
+
+    border-radius: 1.5rem;
+    margin: 1rem;
+
+    box-shadow:
+        0 .75rem 2rem rgba(65, 55, 145, .07);
+
+    backdrop-filter: blur(20px);
+}
+
+
+/* =========================================================
+   INDIVIDUAL ACTIONS
+   ========================================================= */
+
+.action-card {
+    display: flex;
+    align-items: center;
+
+    gap: 1rem;
+
+    box-sizing: border-box;
+}
+
+.create-card {
+    width: 32%;
+    min-width: 19rem;
+}
+
+.search-card {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.action-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0edff,
+            #e8e3ff
+        );
+
+    color: #6248e8;
+}
+
+.action-icon mat-icon {
+    width: 1.8rem;
+    height: 1.8rem;
+
+    font-size: 1.8rem;
+}
+
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+.action-content {
+    min-width: 0;
+}
+
+.action-content h2 {
+    margin: 0;
+
+    color: #17213d;
+
+    font-size: 1rem;
+
+    font-weight: 750;
+
+    line-height: 1.3;
+}
+
+.action-content p {
+    margin: .25rem 0 0;
+
+    color: #7c8499;
+
+    font-size: .75rem;
+
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   CREATE BUTTON
+   ========================================================= */
+
+.create-card .action-content {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+}
+
+.create-button {
+    height: 2.5rem;
+
+    margin-top: .65rem;
+
+    padding: 0 1.15rem;
+
+    border-radius: .7rem !important;
+
+    font-size: .8rem;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 .4rem 1rem rgba(98, 72, 232, .2);
+}
+
+.create-button mat-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+
+    font-size: 1.1rem;
+}
+
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.action-divider {
+    width: 1px;
+
+    height: 5rem;
+
+    margin: 0 2rem;
+
+    flex-shrink: 0;
+
+    background: #e8e6ef;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.search-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 1rem;
+}
+
+.search-card .action-content {
+    width: 13rem;
+
+    flex-shrink: 0;
+}
+
+.search-controls {
+    flex: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: .75rem;
+
+    min-width: 0;
+}
+.email-field {
+    flex: 1;
+    min-width: 12rem;
+    margin: 0;
+
+    height: 3.5rem;
+}
+
+.email-field .mat-mdc-text-field-wrapper {
+    height: 3.5rem;
+}
+
+.email-field .mat-mdc-form-field-flex {
+    height: 3.5rem;
+    align-items: center;
+}
+
+.search-button {
+    height: 3.5rem;
+
+    min-width: 5.5rem;
+
+    padding: 0 1.25rem;
+
+    border-radius: .75rem !important;
+
+    font-size: .8rem;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .bubble-actions {
+        padding: 1.25rem;
+
+        gap: 1rem;
+    }
+
+    .create-card {
+        width: 35%;
+        min-width: 16rem;
+    }
+
+    .action-divider {
+        margin: 0 1rem;
+    }
+
+    .search-card .action-content {
+        width: 11rem;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .bubble-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 1.25rem;
+
+        padding: 1.25rem;
+
+        min-height: auto;
+    }
+
+    .action-card,
+    .create-card,
+    .search-card {
+        width: 100%;
+    }
+
+    .action-divider {
+        width: 100%;
+        height: 1px;
+
+        margin: 0;
+
+        background: #e8e6ef;
+    }
+
+    .search-card {
+        flex-wrap: wrap;
+    }
+
+    .search-card .action-content {
+        width: auto;
+
+        flex: 1;
+    }
+
+.search-controls {
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+
+    gap: .75rem;
+    min-width: 0;
+}
+
+    .email-field {
+        min-width: 0;
+    }
+
+}

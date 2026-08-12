@@ -1,1 +1,89 @@
-<p>my-bubbles works!</p>
+<div class="bubble-actions">
+
+  <!-- Create Bubble -->
+  <div class="action-card create-card">
+
+    <div class="action-icon">
+      <mat-icon>add</mat-icon>
+    </div>
+
+    <div class="action-content">
+      <h2>Create New Bubble</h2>
+
+      <p>
+        Build a new CFP bubble and lock it in.
+      </p>
+
+      <button
+        mat-flat-button
+        color="primary"
+        class="create-button"
+        routerLink="/create-bubble">
+
+        <mat-icon>add</mat-icon>
+        Create Bubble
+
+      </button>
+    </div>
+
+  </div>
+
+
+  <div class="action-divider"></div>
+
+
+  <!-- Find Bubble -->
+  <div class="action-card search-card">
+
+    <div class="action-icon">
+      <mat-icon>mail_outline</mat-icon>
+    </div>
+
+    <div class="action-content">
+
+      <h2>Find Bubbles by Email</h2>
+
+      <p>
+        Enter the email you used to create your bubbles.
+      </p>
+
+    </div>
+
+
+    <div class="search-controls">
+
+      <mat-form-field
+        appearance="outline"
+        class="email-field">
+
+        <mat-label>Email</mat-label>
+
+        <input
+          matInput
+          type="email"
+          placeholder="Enter your email"
+          [(ngModel)]="searchEmail"
+          (keyup.enter)="searchBubbles()">
+
+        <mat-icon matSuffix>
+          search
+        </mat-icon>
+
+      </mat-form-field>
+
+
+      <button
+        mat-flat-button
+        color="primary"
+        class="search-button"
+        (click)="searchBubbles()">
+
+        Search
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
