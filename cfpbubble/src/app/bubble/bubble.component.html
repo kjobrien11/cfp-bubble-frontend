@@ -17,44 +17,7 @@
 
       </div>
 
-      <!-- Bubble -->
-     <div
-  class="bubble"
-  [class.small-bubble]="selectedTeams.length <= 6"
-  [class.medium-bubble]="selectedTeams.length > 6 && selectedTeams.length <= 12"
-  [class.large-bubble]="selectedTeams.length > 12"
->
-
-        @for (team of selectedTeams; track team.espnId) {
-
-          <div class="logo-wrapper">
-
-            <img
-              class="logo"
-              [src]="'https://a.espncdn.com/i/teamlogos/ncaa/500/' + team.espnId + '.png'"
-              [alt]="team.schoolName">
-
-          </div>
-
-        }
-
-
-        @if (selectedTeams.length === 0) {
-
-          <div class="empty-bubble">
-
-            <mat-icon>add_circle_outline</mat-icon>
-
-            <span>
-              Start adding teams
-            </span>
-
-          </div>
-
-        }
-
-      </div>
-
+     <app-bubble-visualizer [teams]="selectedTeams"></app-bubble-visualizer>
 
       <div class="counter">
 

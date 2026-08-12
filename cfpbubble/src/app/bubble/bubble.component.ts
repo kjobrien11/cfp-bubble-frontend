@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { BubbleService } from '../services/bubble.service';
 import { BubbleRequest } from '../dtos/bubble-request';
 import { FormsModule } from '@angular/forms';
+import { BubbleVisualizerComponent } from '../bubble-visualizer/bubble-visualizer.component';
 
 @Component({
   selector: 'app-bubble',
@@ -26,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     AsyncPipe,
     MatButtonModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    BubbleVisualizerComponent
   ],
   templateUrl: './bubble.component.html',
   styleUrl: './bubble.component.css'
