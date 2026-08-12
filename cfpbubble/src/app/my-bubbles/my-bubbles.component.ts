@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BubbleService } from '../services/bubble.service';
 import { TeamService } from '../services/team.service';
+import { BubbleVisualizerComponent } from '../bubble-visualizer/bubble-visualizer.component';
 
 @Component({
   selector: 'app-my-bubbles',
@@ -18,7 +19,8 @@ import { TeamService } from '../services/team.service';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    RouterModule
+    RouterModule,
+    BubbleVisualizerComponent
   ],
   templateUrl: './my-bubbles.component.html',
   styleUrl: './my-bubbles.component.css'

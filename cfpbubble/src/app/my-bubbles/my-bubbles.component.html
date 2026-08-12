@@ -87,3 +87,29 @@
   </div>
 
 </div>
+
+@if (bubbles.length > 0) {
+
+  <div class="bubble-results">
+
+    @for (bubble of bubbles; track bubble.publicId) {
+
+      <div class="bubble-card">
+
+        <app-bubble-visualizer
+          [teams]="bubble.teams">
+        </app-bubble-visualizer>
+
+      </div>
+
+    }
+
+  </div>
+
+} @else if (searchEmail.trim()) {
+
+  <div class="no-results">
+    No bubbles found for this email.
+  </div>
+
+}

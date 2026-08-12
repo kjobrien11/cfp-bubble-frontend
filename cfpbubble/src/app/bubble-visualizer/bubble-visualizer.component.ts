@@ -10,6 +10,6 @@ import { MatIcon } from '@angular/material/icon';
 })
 export class BubbleVisualizerComponent {
 
-  @Input() teams: Team[] = [];
+  @Input() teams: any[] = [];
 
 }
