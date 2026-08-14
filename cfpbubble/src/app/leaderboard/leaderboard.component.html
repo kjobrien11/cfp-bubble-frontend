@@ -431,6 +431,7 @@
 
             <img
               class="team-logo"
+              [class.team-dimmed]="!isTeamInSelectedConference(team)"
               [src]="team.logoUrl"
               [alt]="team.schoolName"
               [title]="team.schoolName">

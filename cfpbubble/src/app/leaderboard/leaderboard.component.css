@@ -789,3 +789,20 @@
     display: flex;
     align-items: center;
 }
+
+.team-logo {
+    width: 2rem;
+    height: 2rem;
+
+    object-fit: contain;
+
+    transition:
+        filter .25s ease,
+        opacity .25s ease;
+}
+
+.team-logo.team-dimmed {
+    filter: grayscale(1);
+
+    opacity: .3;
+}

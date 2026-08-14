@@ -259,6 +259,14 @@ export class LeaderboardComponent implements OnInit {
     ].sort();
   }
 
+  isTeamInSelectedConference(team: Team): boolean {
+  if (!this.selectedConference) {
+    return true;
+  }
+
+  return team.conferenceName === this.selectedConference;
+}
+
   /* =====================================================
    STATISTICS
   ===================================================== */
