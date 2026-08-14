@@ -621,14 +621,16 @@ export class LeaderboardComponent implements OnInit {
 
     if (width >= 1400) {
       this.maxVisibleTeams = 20;
-    } else if (width >= 1200) {
+    } else if (width >= 1300) {
       this.maxVisibleTeams = 15;
+    } else if (width >= 1100) {
+      this.maxVisibleTeams = 10;
     } else if (width >= 1000) {
-      this.maxVisibleTeams = 12;
-    } else if (width >= 700) {
       this.maxVisibleTeams = 8;
-    } else {
+    } else if (width >= 800) {
       this.maxVisibleTeams = 5;
+    } else {
+      this.maxVisibleTeams = 3;
     }
   }
 }
