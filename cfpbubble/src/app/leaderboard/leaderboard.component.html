@@ -62,9 +62,7 @@
 
                 @if (mostPopularTeam) {
 
-                    <img
-                        [src]="mostPopularTeam.logoUrl"
-                        [alt]="mostPopularTeam.schoolName">
+                <img [src]="mostPopularTeam.logoUrl" [alt]="mostPopularTeam.schoolName">
 
                 }
 
@@ -78,13 +76,13 @@
 
                 @if (mostPopularTeam) {
 
-                    <span class="popular-team-name">
-                        {{ mostPopularTeam.schoolName }}
-                    </span>
+                <span class="popular-team-name">
+                    {{ mostPopularTeam.schoolName }}
+                </span>
 
-                    <span class="popular-percentage">
-                        Picked by {{ mostPopularTeamPercentage }}%
-                    </span>
+                <span class="popular-percentage">
+                    Picked by {{ mostPopularTeamPercentage }}%
+                </span>
 
                 }
 
@@ -139,11 +137,7 @@
 
             <mat-form-field appearance="outline">
 
-                <input
-                    matInput
-                    [(ngModel)]="searchTerm"
-                    placeholder="Search bubbles..."
-                    (input)="applyFilters()">
+                <input matInput [(ngModel)]="searchTerm" placeholder="Search bubbles..." (input)="applyFilters()">
 
             </mat-form-field>
 
@@ -159,9 +153,7 @@
                 Contains Team
             </label>
 
-            <mat-form-field
-                appearance="outline"
-                class="team-filter-field">
+            <mat-form-field appearance="outline" class="team-filter-field">
 
                 <mat-label>
                     Search teams
@@ -171,15 +163,9 @@
                     search
                 </mat-icon>
 
-                <input
-                    matInput
-                    placeholder="All teams"
-                    [formControl]="teamFilterControl"
-                    [matAutocomplete]="teamAuto">
+                <input matInput placeholder="All teams" [formControl]="teamFilterControl" [matAutocomplete]="teamAuto">
 
-                <mat-autocomplete
-                    #teamAuto="matAutocomplete"
-                    [displayWith]="displayTeam"
+                <mat-autocomplete #teamAuto="matAutocomplete" [displayWith]="displayTeam"
                     (optionSelected)="onTeamFilterSelected($event)">
 
                     <mat-option [value]="null">
@@ -187,25 +173,24 @@
                     </mat-option>
 
                     @for (
-                        team of filteredTeams | async;
-                        track team.espnId
+                    team of filteredTeams | async;
+                    track team.espnId
                     ) {
 
-                        <mat-option [value]="team">
+                    <mat-option [value]="team">
 
-                            <div class="team-option">
+                        <div class="team-option">
 
-                                <img
-                                    [src]="'https://a.espncdn.com/i/teamlogos/ncaa/500/' + team.espnId + '.png'"
-                                    [alt]="team.schoolName">
+                            <img [src]="'https://a.espncdn.com/i/teamlogos/ncaa/500/' + team.espnId + '.png'"
+                                [alt]="team.schoolName">
 
-                                <span>
-                                    {{ team.schoolName }}
-                                </span>
+                            <span>
+                                {{ team.schoolName }}
+                            </span>
 
-                            </div>
+                        </div>
 
-                        </mat-option>
+                    </mat-option>
 
                     }
 
@@ -227,9 +212,7 @@
 
             <mat-form-field appearance="outline">
 
-                <mat-select
-                    [(ngModel)]="selectedConference"
-                    (selectionChange)="applyFilters()"
+                <mat-select [(ngModel)]="selectedConference" (selectionChange)="applyFilters()"
                     placeholder="All conferences">
 
                     <mat-option [value]="null">
@@ -237,13 +220,13 @@
                     </mat-option>
 
                     @for (
-                        conference of conferences;
-                        track conference
+                    conference of conferences;
+                    track conference
                     ) {
 
-                        <mat-option [value]="conference">
-                            {{ conference }}
-                        </mat-option>
+                    <mat-option [value]="conference">
+                        {{ conference }}
+                    </mat-option>
 
                     }
 
@@ -265,9 +248,7 @@
 
             <mat-form-field appearance="outline">
 
-                <mat-select
-                    [(ngModel)]="selectedBubbleSize"
-                    (selectionChange)="applyFilters()">
+                <mat-select [(ngModel)]="selectedBubbleSize" (selectionChange)="applyFilters()">
 
                     <mat-option value="all">
                         All Sizes
@@ -307,9 +288,7 @@
 
             <mat-form-field appearance="outline">
 
-                <mat-select
-                    [(ngModel)]="sortBy"
-                    (selectionChange)="applyFilters()">
+                <mat-select [(ngModel)]="sortBy" (selectionChange)="applyFilters()">
 
                     <mat-option value="rank">
                         Current Rank
@@ -342,10 +321,7 @@
 
         <div class="clear-filters-group">
 
-            <button
-                mat-stroked-button
-                class="clear-filters-button"
-                (click)="clearFilters()">
+            <button mat-stroked-button class="clear-filters-button" (click)="clearFilters()">
 
                 <mat-icon>
                     refresh
@@ -416,111 +392,100 @@
         <!-- Rows -->
 
         @for (
-            bubble of filteredBubbles;
-            track bubble.publicId;
-            let i = $index
+        bubble of filteredBubbles;
+        track bubble.publicId;
+        let i = $index
         ) {
 
-            <div class="leaderboard-row">
+        <div class="leaderboard-row">
 
 
-                <!-- Rank -->
+            <!-- Rank -->
 
-                <div class="rank-cell">
+            <div class="rank-cell">
 
-                    <span
-                        class="rank-number"
-                        [class.top-three]="i < 3">
+                <span class="rank-number" [class.top-three]="i < 3">
 
-                        {{ i + 1 }}
+                    {{ i + 1 }}
 
-                    </span>
-
-                </div>
-
-
-                <!-- Bubble -->
-
-                <div class="bubble-name-cell">
-
-                    <strong>
-                        {{ bubble.name }}
-                    </strong>
-
-                </div>
-
-
-                <!-- Teams -->
-
-                <div class="teams-cell">
-
-                    @for (
-                        team of bubble.teams.slice(0, 10);
-                        track team.espnId
-                    ) {
-
-                        <img
-                            class="team-logo"
-                            [class.team-dimmed]="!isTeamInSelectedConference(team)"
-                            [src]="team.logoUrl"
-                            [alt]="team.schoolName"
-                            [title]="team.schoolName">
-
-                    }
-
-                    @if (bubble.teams.length > 10) {
-
-                        <span class="more-teams">
-                            +{{ bubble.teams.length - 10 }}
-                        </span>
-
-                    }
-
-                </div>
-
-
-                <!-- Record -->
-
-                <div class="record-cell">
-
-                    {{ bubble.wins }}–{{ bubble.losses }}
-
-                </div>
-
-
-                <!-- Win Percentage -->
-
-                <div class="win-cell">
-
-                    {{ getWinPercentage(bubble) | number:'1.1-1' }}%
-
-                </div>
-
-
-                <!-- Size -->
-
-                <div class="size-cell">
-
-                    <span
-                        class="size-badge"
-                        [class.best]="bubble.teams.length <= 5"
-                        [class.small]="
-                            bubble.teams.length > 5 &&
-                            bubble.teams.length <= 7
-                        "
-                        [class.medium]="
-                            bubble.teams.length > 7 &&
-                            bubble.teams.length <= 10
-                        "
-                        [class.large]="bubble.teams.length > 10">
-
-                        {{ bubble.teams.length }}
-
-                    </span>
-
-                </div>
+                </span>
 
             </div>
+
+
+            <!-- Bubble -->
+
+            <div class="bubble-name-cell">
+
+                <strong>
+                    {{ bubble.name }}
+                </strong>
+
+            </div>
+
+
+            <!-- Teams -->
+
+            <div class="teams-cell">
+
+                @for (
+                team of bubble.teams.slice(0, maxVisibleTeams);
+                track team.espnId
+                ) {
+
+                <img class="team-logo" [class.team-dimmed]="!isTeamInSelectedConference(team)" [src]="team.logoUrl"
+                    [alt]="team.schoolName" [title]="team.schoolName">
+
+                }
+
+                @if (bubble.teams.length > maxVisibleTeams) {
+
+                <span class="more-teams">
+                    +{{ bubble.teams.length - maxVisibleTeams }}
+                </span>
+
+                }
+
+            </div>
+
+
+            <!-- Record -->
+
+            <div class="record-cell">
+
+                {{ bubble.wins }}–{{ bubble.losses }}
+
+            </div>
+
+
+            <!-- Win Percentage -->
+
+            <div class="win-cell">
+
+                {{ getWinPercentage(bubble) | number:'1.1-1' }}%
+
+            </div>
+
+
+            <!-- Size -->
+
+            <div class="size-cell">
+
+                <span class="size-badge" [class.best]="bubble.teams.length <= 5" [class.small]="
+                            bubble.teams.length > 5 &&
+                            bubble.teams.length <= 7
+                        " [class.medium]="
+                            bubble.teams.length > 7 &&
+                            bubble.teams.length <= 10
+                        " [class.large]="bubble.teams.length > 10">
+
+                    {{ bubble.teams.length }}
+
+                </span>
+
+            </div>
+
+        </div>
 
         }
 
@@ -529,21 +494,21 @@
 
         @if (filteredBubbles.length === 0) {
 
-            <div class="empty-state">
+        <div class="empty-state">
 
-                <mat-icon>
-                    search_off
-                </mat-icon>
+            <mat-icon>
+                search_off
+            </mat-icon>
 
-                <h3>
-                    No bubbles found
-                </h3>
+            <h3>
+                No bubbles found
+            </h3>
 
-                <p>
-                    Try changing your filters.
-                </p>
+            <p>
+                Try changing your filters.
+            </p>
 
-            </div>
+        </div>
 
         }
 

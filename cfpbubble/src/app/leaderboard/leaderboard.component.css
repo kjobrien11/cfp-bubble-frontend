@@ -606,10 +606,10 @@ TEAMS
 }
 
 .team-logo {
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2rem;
+    height: 2rem;
 
-    flex: 0 0 2.25rem;
+    flex: 0 0 1rem;
 
     object-fit: contain;
 

@@ -66,6 +66,9 @@ export class LeaderboardComponent implements OnInit {
 
   averageBubbleSize = 0;
 
+  maxVisibleTeams = 20;
+
+
   /* =====================================================
    FILTERS
   ===================================================== */
@@ -117,6 +120,12 @@ export class LeaderboardComponent implements OnInit {
           return this.filterTeams(search);
         })
       );
+
+      this.updateVisibleTeamCount();
+
+    window.addEventListener('resize', () => {
+      this.updateVisibleTeamCount();
+    });
   }
 
   /* =====================================================
@@ -592,18 +601,34 @@ export class LeaderboardComponent implements OnInit {
 
   clearFilters(): void {
 
-  this.searchTerm = '';
+    this.searchTerm = '';
 
-  this.selectedTeam = null;
+    this.selectedTeam = null;
 
-  this.selectedConference = null;
+    this.selectedConference = null;
 
-  this.selectedBubbleSize = 'all';
+    this.selectedBubbleSize = 'all';
 
-  this.sortBy = 'rank';
+    this.sortBy = 'rank';
 
-  this.teamFilterControl.setValue(null);
+    this.teamFilterControl.setValue(null);
 
-  this.applyFilters();
-}
+    this.applyFilters();
+  }
+
+  private updateVisibleTeamCount(): void {
+    const width = window.innerWidth;
+
+    if (width >= 1400) {
+      this.maxVisibleTeams = 20;
+    } else if (width >= 1200) {
+      this.maxVisibleTeams = 15;
+    } else if (width >= 1000) {
+      this.maxVisibleTeams = 12;
+    } else if (width >= 700) {
+      this.maxVisibleTeams = 8;
+    } else {
+      this.maxVisibleTeams = 5;
+    }
+  }
 }
