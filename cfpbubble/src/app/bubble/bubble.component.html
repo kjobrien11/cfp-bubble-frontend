@@ -1,253 +1,228 @@
 <div class="page">
 
-  <!-- Main Content -->
-  <main class="main-content">
+    <!-- Main Content -->
+    <main class="main-content">
 
-    <!-- LEFT SIDE -->
-    <section class="bubble-area">
+        <!-- LEFT SIDE -->
+        <section class="bubble-area">
 
-      <div class="hero">
+            <div class="hero">
 
-        <h1>Build Your CFP Bubble</h1>
+                <h1>Build Your CFP Bubble</h1>
 
-        <p>
-          Pick the smallest group of teams that contains
-          the eventual CFP Champion.
-        </p>
-
-      </div>
-
-     <div class="bubble-container">
-  <app-bubble-visualizer
-    [teams]="selectedTeams">
-  </app-bubble-visualizer>
-</div>
-
-      <div class="counter">
-
-        <strong>{{ selectedTeams.length }}</strong>
-
-        {{ selectedTeams.length === 1 ? 'Team' : 'Teams' }}
-
-        in your bubble
-
-      </div>
-
-    </section>
-
-
-    <!-- RIGHT SIDE -->
-    <aside class="builder-panel">
-
-      <div class="panel-header">
-
-        <span class="panel-kicker">
-          BUILD YOUR BUBBLE
-        </span>
-
-        <h2>Add Teams</h2>
-
-        <p>
-          Select the teams you think could become
-          the CFP Champion.
-        </p>
-
-      </div>
-
-
-      <mat-form-field
-  appearance="outline"
-  class="team-search">
-
-  <mat-label>Search teams</mat-label>
-
-  <mat-icon matPrefix>
-    search
-  </mat-icon>
-
-  <input
-    matInput
-    placeholder="Search for a team..."
-    [formControl]="myControl"
-    [matAutocomplete]="auto"
-    [disabled]="selectedTeams.length >= 20">
-
-  <mat-autocomplete
-    #auto="matAutocomplete"
-    [displayWith]="displayTeam"
-    (optionSelected)="onTeamSelected($event)">
-
-    @for (
-      team of filteredTeams | async;
-      track team.espnId
-    ) {
-
-      <mat-option [value]="team">
-        {{ team.schoolName }}
-      </mat-option>
-
-    }
-
-  </mat-autocomplete>
-
-</mat-form-field>
-
-@if (selectedTeams.length >= 20) {
-  <div class="max-teams-message">
-    Maximum of 20 teams reached.
-  </div>
-}
-
-
-      <!-- Selected Teams -->
-      <div class="selected-section">
-
-        <div class="selected-header">
-
-          <div class="selected-title">
-
-            <span class="section-number">
-              {{ selectedTeams.length }}
-            </span>
-
-            <span>Teams in your bubble</span>
-
-          </div>
-
-
-          @if (selectedTeams.length > 0) {
-
-            <button
-              mat-button
-              class="clear-button"
-              (click)="clear()">
-
-              Clear all
-
-            </button>
-
-          }
-
-        </div>
-
-
-        <div class="team-list">
-
-          @for (
-            team of selectedTeams;
-            track team.espnId
-          ) {
-
-            <div class="team-row">
-
-              <img
-                [src]="'https://a.espncdn.com/i/teamlogos/ncaa/500/' + team.espnId + '.png'"
-                [alt]="team.schoolName">
-
-              <span>
-                {{ team.schoolName }}
-              </span>
-
-              <button
-                mat-icon-button
-                class="remove-button"
-                (click)="removeTeam(team)"
-                aria-label="Remove team">
-
-                <mat-icon>close</mat-icon>
-
-              </button>
+                <p>
+                    Pick the smallest group of teams that contains
+                    the eventual CFP Champion.
+                </p>
 
             </div>
 
-          }
+            <div class="bubble-container">
+                <app-bubble-visualizer [teams]="selectedTeams">
+                </app-bubble-visualizer>
+            </div>
 
+            <div class="counter">
 
-          @if (selectedTeams.length === 0) {
+                <strong>{{ selectedTeams.length }}</strong>
 
-            <div class="empty-list">
+                {{ selectedTeams.length === 1 ? 'Team' : 'Teams' }}
 
-              <mat-icon>sports_football</mat-icon>
-
-              <span>
-                Your selected teams will appear here
-              </span>
+                in your bubble
 
             </div>
 
-          }
-
-        </div>
-
-      </div>
+        </section>
 
 
-      <!-- Divider -->
-      <div class="panel-divider"></div>
+        <!-- RIGHT SIDE -->
+        <aside class="builder-panel">
+
+            <div class="panel-header">
+
+                <span class="panel-kicker">
+                    BUILD YOUR BUBBLE
+                </span>
+
+                <h2>Add Teams</h2>
+
+                <p>
+                    Select the teams you think could become
+                    the CFP Champion.
+                </p>
+
+            </div>
 
 
-      <!-- User Info -->
-      <div class="submit-section">
+            <mat-form-field appearance="outline" class="team-search">
 
-        <span class="panel-kicker">
-          ALMOST THERE
-        </span>
+                <mat-label>Search teams</mat-label>
 
-        <h3>Lock your bubble</h3>
+                <mat-icon matPrefix>
+                    search
+                </mat-icon>
 
-        <p class="lock-description">
-          Once submitted, your bubble can't be changed.
-        </p>
+                <input matInput placeholder="Search for a team..." [formControl]="myControl" [matAutocomplete]="auto"
+                    [disabled]="selectedTeams.length >= 20">
 
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayTeam"
+                    (optionSelected)="onTeamSelected($event)">
 
-        <mat-form-field appearance="outline">
+                    @for (
+                    team of filteredTeams | async;
+                    track team.espnId
+                    ) {
 
-          <mat-label>Bubble Name</mat-label>
+                    <mat-option [value]="team">
+                        {{ team.schoolName }}
+                    </mat-option>
 
-          <mat-icon matPrefix>
-            label_outline
-          </mat-icon>
+                    }
 
-          <input
-            matInput
-            [(ngModel)]="name">
+                </mat-autocomplete>
 
-        </mat-form-field>
+            </mat-form-field>
 
-
-        <mat-form-field appearance="outline">
-
-          <mat-label>Email</mat-label>
-
-          <mat-icon matPrefix>
-            mail_outline
-          </mat-icon>
-
-          <input
-            matInput
-            type="email"
-            [(ngModel)]="email">
-
-        </mat-form-field>
+            @if (selectedTeams.length >= 20) {
+            <div class="max-teams-message">
+                Maximum of 20 teams reached.
+            </div>
+            }
 
 
-        <button
-          mat-flat-button
-          color="primary"
-          class="submit-button"
-          [disabled]="!name?.trim() || !email?.trim() || selectedTeams.length === 0"
-          (click)="submit()">
+            <!-- Selected Teams -->
+            <div class="selected-section">
 
-          <mat-icon>lock</mat-icon>
+                <div class="selected-header">
 
-          Lock My Bubble
+                    <div class="selected-title">
 
-        </button>
+                        <span class="section-number">
+                            {{ selectedTeams.length }}
+                        </span>
 
-      </div>
+                        <span>Teams in your bubble</span>
 
-    </aside>
+                    </div>
 
-  </main>
+
+                    @if (selectedTeams.length > 0) {
+
+                    <button mat-button class="clear-button" (click)="clear()">
+
+                        Clear all
+
+                    </button>
+
+                    }
+
+                </div>
+
+
+                <div class="team-list">
+
+                    @for (
+                    team of selectedTeams;
+                    track team.espnId
+                    ) {
+
+                    <div class="team-row">
+
+                        <img [src]="'https://a.espncdn.com/i/teamlogos/ncaa/500/' + team.espnId + '.png'"
+                            [alt]="team.schoolName">
+
+                        <span>
+                            {{ team.schoolName }}
+                        </span>
+
+                        <button mat-icon-button class="remove-button" (click)="removeTeam(team)"
+                            aria-label="Remove team">
+
+                            <mat-icon>close</mat-icon>
+
+                        </button>
+
+                    </div>
+
+                    }
+
+
+                    @if (selectedTeams.length === 0) {
+
+                    <div class="empty-list">
+
+                        <mat-icon>sports_football</mat-icon>
+
+                        <span>
+                            Your selected teams will appear here
+                        </span>
+
+                    </div>
+
+                    }
+
+                </div>
+
+            </div>
+
+
+            <!-- Divider -->
+            <div class="panel-divider"></div>
+
+
+            <!-- User Info -->
+            <div class="submit-section">
+
+                <span class="panel-kicker">
+                    ALMOST THERE
+                </span>
+
+                <h3>Lock your bubble</h3>
+
+                <p class="lock-description">
+                    Once submitted, your bubble can't be changed.
+                </p>
+
+
+                <mat-form-field appearance="outline">
+
+                    <mat-label>Bubble Name</mat-label>
+
+                    <mat-icon matPrefix>
+                        label_outline
+                    </mat-icon>
+
+                    <input matInput [(ngModel)]="name">
+
+                </mat-form-field>
+
+
+                <mat-form-field appearance="outline">
+
+                    <mat-label>Email</mat-label>
+
+                    <mat-icon matPrefix>
+                        mail_outline
+                    </mat-icon>
+
+                    <input matInput type="email" [(ngModel)]="email">
+
+                </mat-form-field>
+
+
+                <button mat-flat-button color="primary" class="submit-button"
+                    [disabled]="!name?.trim() || !email?.trim() || selectedTeams.length === 0" (click)="submit()">
+
+                    <mat-icon>lock</mat-icon>
+
+                    Lock My Bubble
+
+                </button>
+
+            </div>
+
+        </aside>
+
+    </main>
 
 </div>

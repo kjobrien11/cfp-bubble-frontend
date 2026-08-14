@@ -66,14 +66,16 @@ export class BubbleComponent implements OnInit {
     });
   }
 
-  private filterTeams(value: string): Team[] {
-    const filterValue = value.toLowerCase();
+private filterTeams(value: string): Team[] {
+  const filterValue = value.toLowerCase();
 
-    return this.teams.filter(team =>
+  return this.teams
+    .filter(team =>
       team.schoolName.toLowerCase().includes(filterValue) ||
       team.abbreviation.toLowerCase().includes(filterValue)
-    );
-  }
+    )
+    .slice(0, 3);
+}
 
   displayTeam(team: Team | null): string {
     return team ? team.schoolName : '';

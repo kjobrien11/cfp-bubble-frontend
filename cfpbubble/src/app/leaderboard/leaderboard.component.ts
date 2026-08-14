@@ -81,7 +81,7 @@ export class LeaderboardComponent implements OnInit {
 
   selectedBubbleSize = 'all';
 
-  sortBy = 'rank';
+  sortBy = 'record';
 
   /* =====================================================
    TEAM AUTOCOMPLETE
@@ -609,7 +609,7 @@ export class LeaderboardComponent implements OnInit {
 
     this.selectedBubbleSize = 'all';
 
-    this.sortBy = 'rank';
+    this.sortBy = 'record';
 
     this.teamFilterControl.setValue(null);
 
