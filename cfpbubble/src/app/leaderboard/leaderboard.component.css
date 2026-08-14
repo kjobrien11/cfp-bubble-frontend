@@ -1,6 +1,6 @@
 /* =========================================================
-   PAGE
-   ========================================================= */
+PAGE
+========================================================= */
 
 .leaderboard-page {
     width: min(100% - 2rem, 95rem);
@@ -14,8 +14,8 @@
 
 
 /* =========================================================
-   STATISTICS
-   ========================================================= */
+STATISTICS
+========================================================= */
 
 .stats-grid {
     display: grid;
@@ -28,14 +28,12 @@
     margin-bottom: 1.5rem;
 }
 
-
 .stat-card {
     min-height: 9rem;
 
     padding: 1.35rem;
 
     display: flex;
-
     align-items: center;
 
     gap: 1rem;
@@ -56,14 +54,12 @@
         box-shadow .2s ease;
 }
 
-
 .stat-card:hover {
     transform: translateY(-2px);
 
     box-shadow:
         0 1rem 2.5rem rgba(65, 55, 145, .1);
 }
-
 
 .stat-icon {
     width: 3.5rem;
@@ -79,14 +75,12 @@
     border-radius: 1rem;
 }
 
-
 .stat-icon mat-icon {
     width: 1.7rem;
     height: 1.7rem;
 
     font-size: 1.7rem;
 }
-
 
 .stat-icon.purple {
     color: #6348e8;
@@ -99,7 +93,6 @@
         );
 }
 
-
 .stat-icon.blue {
     color: #1685e8;
 
@@ -111,7 +104,6 @@
         );
 }
 
-
 .stat-icon.green {
     background:
         linear-gradient(
@@ -120,7 +112,6 @@
             #d9f1dd
         );
 }
-
 
 .stat-icon.orange {
     color: #f07820;
@@ -133,14 +124,12 @@
         );
 }
 
-
 .team-stat-icon img {
     width: 2.5rem;
     height: 2.5rem;
 
     object-fit: contain;
 }
-
 
 .stat-content {
     min-width: 0;
@@ -149,7 +138,6 @@
 
     flex-direction: column;
 }
-
 
 .stat-label {
     color: #697188;
@@ -160,7 +148,6 @@
 
     margin-bottom: .3rem;
 }
-
 
 .stat-value {
     color: #111936;
@@ -174,7 +161,6 @@
     letter-spacing: -.04em;
 }
 
-
 .stat-subtitle {
     color: #9198aa;
 
@@ -182,7 +168,6 @@
 
     margin-top: .3rem;
 }
-
 
 .popular-team-name {
     color: #111936;
@@ -198,7 +183,6 @@
     text-overflow: ellipsis;
 }
 
-
 .popular-percentage {
     color: #23894a;
 
@@ -211,20 +195,21 @@
 
 
 /* =========================================================
-   FILTERS
-   ========================================================= */
+FILTERS
+========================================================= */
 
 .filter-card {
     display: grid;
 
     grid-template-columns:
         1.4fr
-        1.25fr
+        1.3fr
+        1.1fr
         1fr
-        .9fr
-        1fr;
+        1fr
+        auto;
 
-    gap: 1rem;
+    gap: .75rem;
 
     padding: 1.2rem 1.35rem;
 
@@ -242,11 +227,9 @@
     margin-bottom: 1rem;
 }
 
-
 .filter-group {
     min-width: 0;
 }
-
 
 .filter-group > label {
     display: flex;
@@ -264,7 +247,6 @@
     margin-bottom: .35rem;
 }
 
-
 .filter-group > label mat-icon {
     width: .9rem;
     height: .9rem;
@@ -272,28 +254,21 @@
     font-size: .9rem;
 }
 
-
 .filter-group mat-form-field {
     width: 100%;
 }
 
-
 .filter-group
-::ng-deep
 .mat-mdc-form-field-subscript-wrapper {
     display: none;
 }
 
-
 .filter-group
-::ng-deep
 .mat-mdc-text-field-wrapper {
     background: #fafaff;
 }
 
-
 .filter-group
-::ng-deep
 .mat-mdc-form-field-infix {
     min-height: 2.8rem;
 
@@ -301,13 +276,15 @@
     padding-bottom: .65rem;
 }
 
-
 .filter-group
-::ng-deep
 .mat-mdc-form-field-flex {
     height: 2.8rem;
 }
 
+
+/* =========================================================
+TEAM OPTION
+========================================================= */
 
 .team-option {
     display: flex;
@@ -316,7 +293,6 @@
 
     gap: .65rem;
 }
-
 
 .team-option img {
     width: 1.6rem;
@@ -327,8 +303,139 @@
 
 
 /* =========================================================
-   RESULTS
-   ========================================================= */
+TEAM FILTER
+========================================================= */
+
+.team-filter-field {
+    width: 100%;
+}
+
+.team-filter-field .mat-mdc-form-field-flex {
+    align-items: center;
+}
+
+.team-filter-field .mat-mdc-form-field-infix {
+    min-height: 2.8rem;
+
+    display: flex;
+    align-items: center;
+
+    padding-top: .65rem !important;
+    padding-bottom: .65rem !important;
+}
+
+.team-filter-field .mat-mdc-input-element {
+    margin: 0;
+    padding: 0;
+
+    line-height: normal;
+}
+
+.team-filter-field .mat-mdc-form-field-icon-prefix {
+    padding: 0 .5rem 0 0;
+
+    display: flex;
+    align-items: center;
+}
+
+.team-filter-field .mat-mdc-form-field-icon-prefix .mat-icon {
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+}
+
+
+/* =========================================================
+CLEAR FILTERS
+========================================================= */
+
+/* =========================================================
+CLEAR FILTERS
+========================================================= */
+
+.clear-filters-group {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.clear-filters-group::before {
+    content: "Clear";
+
+    height: 1rem;
+
+    margin-bottom: .35rem;
+
+    visibility: hidden;
+
+    font-size: .7rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.clear-filters-button {
+    width: 100%;
+    height: 2.8rem;
+
+    box-sizing: border-box;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: .35rem;
+
+    margin: 0;
+    padding: 1.5rem;
+
+    border: 1px solid #ddd9eb !important;
+    border-radius: .75rem !important;
+
+    background: #fafaff !important;
+    color: #747b90 !important;
+
+    font-size: .7rem;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.clear-filters-button mat-icon {
+    width: 1rem;
+    height: 1rem;
+
+    margin: 0;
+
+    font-size: 1rem;
+
+    flex-shrink: 0;
+}
+
+.clear-filters-button:hover {
+    background: #f1efff !important;
+
+    border-color: #cec7f3 !important;
+
+    color: #6046e8 !important;
+
+    transform: translateY(-1px);
+}
+
+.clear-filters-button mat-icon {
+    width: 1rem;
+    height: 1rem;
+
+    margin-right: .25rem;
+
+    font-size: 1rem;
+}
+
+
+/* =========================================================
+RESULTS
+========================================================= */
 
 .results-info {
     display: flex;
@@ -346,8 +453,8 @@
 
 
 /* =========================================================
-   LEADERBOARD
-   ========================================================= */
+LEADERBOARD
+========================================================= */
 
 .leaderboard-card {
     width: 100%;
@@ -366,8 +473,8 @@
 
 
 /* =========================================================
-   HEADER + ROW
-   ========================================================= */
+HEADER + ROW
+========================================================= */
 
 .leaderboard-header,
 .leaderboard-row {
@@ -383,7 +490,6 @@
 
     align-items: center;
 }
-
 
 .leaderboard-header {
     min-height: 3.5rem;
@@ -407,7 +513,6 @@
     letter-spacing: .06em;
 }
 
-
 .leaderboard-row {
     min-height: 5.5rem;
 
@@ -421,11 +526,9 @@
         background .15s ease;
 }
 
-
 .leaderboard-row:last-child {
     border-bottom: none;
 }
-
 
 .leaderboard-row:hover {
     background: #fafaff;
@@ -433,15 +536,14 @@
 
 
 /* =========================================================
-   RANK
-   ========================================================= */
+RANK
+========================================================= */
 
 .rank-cell {
     display: flex;
 
     align-items: center;
 }
-
 
 .rank-number {
     width: 2rem;
@@ -453,7 +555,6 @@
     font-weight: 800;
 }
 
-
 .rank-number.top-three {
     color: #5d45df;
 
@@ -462,8 +563,8 @@
 
 
 /* =========================================================
-   BUBBLE NAME
-   ========================================================= */
+BUBBLE NAME
+========================================================= */
 
 .bubble-name-cell {
     min-width: 0;
@@ -472,7 +573,6 @@
 
     flex-direction: column;
 }
-
 
 .bubble-name-cell strong {
     color: #17203d;
@@ -490,8 +590,8 @@
 
 
 /* =========================================================
-   TEAMS
-   ========================================================= */
+TEAMS
+========================================================= */
 
 .teams-cell {
     min-width: 0;
@@ -505,7 +605,6 @@
     overflow: hidden;
 }
 
-
 .team-logo {
     width: 2.25rem;
     height: 2.25rem;
@@ -515,17 +614,24 @@
     object-fit: contain;
 
     transition:
-        transform .15s ease;
+        transform .15s ease,
+        filter .25s ease,
+        opacity .25s ease;
 }
-
 
 .team-logo:hover {
     transform: scale(1.18);
 }
 
+.team-logo.team-dimmed {
+    filter: grayscale(1);
+
+    opacity: .3;
+}
 
 .more-teams {
     height: 2.25rem;
+
     min-width: 2.25rem;
 
     padding: 0 .5rem;
@@ -550,8 +656,8 @@
 
 
 /* =========================================================
-   RECORD
-   ========================================================= */
+RECORD
+========================================================= */
 
 .record-cell {
     color: #29314b;
@@ -563,8 +669,8 @@
 
 
 /* =========================================================
-   WIN %
-   ========================================================= */
+WIN %
+========================================================= */
 
 .win-cell {
     color: #23894a;
@@ -576,8 +682,8 @@
 
 
 /* =========================================================
-   SIZE
-   ========================================================= */
+SIZE
+========================================================= */
 
 .size-cell {
     display: flex;
@@ -585,9 +691,9 @@
     align-items: center;
 }
 
-
 .size-badge {
     min-width: 2.3rem;
+
     height: 2rem;
 
     padding: 0 .55rem;
@@ -604,13 +710,11 @@
     font-weight: 800;
 }
 
-
 .size-badge.best {
     color: #168044;
 
     background: #e7f7ed;
 }
-
 
 .size-badge.small {
     color: #4d55b5;
@@ -618,13 +722,11 @@
     background: #eeefff;
 }
 
-
 .size-badge.medium {
     color: #a36714;
 
     background: #fff3dc;
 }
-
 
 .size-badge.large {
     color: #a34747;
@@ -634,8 +736,8 @@
 
 
 /* =========================================================
-   EMPTY STATE
-   ========================================================= */
+EMPTY STATE
+========================================================= */
 
 .empty-state {
     min-height: 18rem;
@@ -652,7 +754,6 @@
     color: #858da1;
 }
 
-
 .empty-state mat-icon {
     width: 2.5rem;
     height: 2.5rem;
@@ -662,7 +763,6 @@
     margin-bottom: .75rem;
 }
 
-
 .empty-state h3 {
     margin: 0;
 
@@ -670,7 +770,6 @@
 
     font-size: 1rem;
 }
-
 
 .empty-state p {
     margin-top: .35rem;
@@ -680,8 +779,8 @@
 
 
 /* =========================================================
-   RESPONSIVE
-   ========================================================= */
+RESPONSIVE - TABLET
+========================================================= */
 
 @media (max-width: 1100px) {
 
@@ -690,25 +789,33 @@
             repeat(2, minmax(0, 1fr));
     }
 
-
     .filter-card {
         grid-template-columns:
-            repeat(3, minmax(0, 1fr));
+            repeat(2, minmax(0, 1fr));
     }
 
+    .clear-filters-group {
+        grid-column: 1 / -1;
+    }
+
+    .clear-filters-button {
+        width: 100%;
+    }
 
     .leaderboard-card {
         overflow-x: auto;
     }
 
-
     .leaderboard-header,
     .leaderboard-row {
         min-width: 900px;
     }
-
 }
 
+
+/* =========================================================
+RESPONSIVE - MOBILE
+========================================================= */
 
 @media (max-width: 700px) {
 
@@ -718,20 +825,17 @@
         padding-top: 1rem;
     }
 
-
     .stats-grid {
         grid-template-columns: 1fr;
 
         gap: .75rem;
     }
 
-
     .stat-card {
         min-height: 6.5rem;
 
         padding: 1rem;
     }
-
 
     .filter-card {
         grid-template-columns: 1fr;
@@ -741,68 +845,89 @@
         padding: 1rem;
     }
 
+    .clear-filters-group {
+        grid-column: auto;
+
+        margin-top: .25rem;
+    }
+
+    .clear-filters-button {
+        width: 100%;
+
+        height: 2.8rem;
+    }
 
     .results-info {
         justify-content: flex-start;
     }
 
-
     .leaderboard-card {
         border-radius: 1rem;
     }
 
-    
+    .team-logo {
+        width: 2rem;
+        height: 2rem;
 
+        flex-basis: 2rem;
+    }
+
+    .more-teams {
+        height: 2rem;
+
+        min-width: 2rem;
+    }
 }
 
-.team-filter-field {
-    width: 100%;
-}
 
-.team-filter-field .mat-mdc-form-field-flex {
-    align-items: center;
-}
+/* =========================================================
+RESPONSIVE - SMALL MOBILE
+========================================================= */
 
-.team-filter-field .mat-mdc-form-field-infix {
-    min-height: 56px;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+@media (max-width: 450px) {
 
-    display: flex;
-    align-items: center;
-}
+    .leaderboard-page {
+        width: calc(100% - 1rem);
 
-.team-filter-field .mat-mdc-input-element {
-    margin: 0;
-    padding: 0;
-    line-height: normal;
-}
+        padding-bottom: 2rem;
+    }
 
-.team-filter-field .mat-mdc-form-field-icon-prefix {
-    padding: 0 .5rem 0 0;
-    display: flex;
-    align-items: center;
-}
+    .stat-card {
+        padding: .9rem;
+    }
 
-.team-filter-field .mat-mdc-form-field-icon-prefix .mat-icon {
-    margin: 0;
-    display: flex;
-    align-items: center;
-}
+    .stat-icon {
+        width: 3rem;
+        height: 3rem;
 
-.team-logo {
-    width: 2rem;
-    height: 2rem;
+        flex-basis: 3rem;
+    }
 
-    object-fit: contain;
+    .stat-icon mat-icon {
+        width: 1.5rem;
+        height: 1.5rem;
 
-    transition:
-        filter .25s ease,
-        opacity .25s ease;
-}
+        font-size: 1.5rem;
+    }
 
-.team-logo.team-dimmed {
-    filter: grayscale(1);
+    .team-stat-icon img {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
 
-    opacity: .3;
+    .stat-value {
+        font-size: 1.65rem;
+    }
+
+    .popular-team-name {
+        font-size: 1.1rem;
+    }
+
+    .filter-card {
+        padding: .9rem;
+    }
+
+    .clear-filters-button {
+        font-size: .72rem;
+    }
 }

@@ -92,7 +92,7 @@ export class LeaderboardComponent implements OnInit {
   constructor(
     private teamService: TeamService,
     private bubbleService: BubbleService
-  ) {}
+  ) { }
 
   /* =====================================================
    INIT
@@ -260,12 +260,12 @@ export class LeaderboardComponent implements OnInit {
   }
 
   isTeamInSelectedConference(team: Team): boolean {
-  if (!this.selectedConference) {
-    return true;
-  }
+    if (!this.selectedConference) {
+      return true;
+    }
 
-  return team.conferenceName === this.selectedConference;
-}
+    return team.conferenceName === this.selectedConference;
+  }
 
   /* =====================================================
    STATISTICS
@@ -545,13 +545,17 @@ export class LeaderboardComponent implements OnInit {
 
       case 'record':
 
-        return 0;
+        return (
+          this.getWinPercentage(b) - this.getWinPercentage(a) ||
+          b.wins - a.wins ||
+          b.teams.length - a.teams.length
+        );
 
       case 'size':
 
         return (
-          a.teams.length -
-          b.teams.length
+          b.teams.length -
+          a.teams.length
         );
 
       case 'alphabetical':
@@ -576,10 +580,30 @@ export class LeaderboardComponent implements OnInit {
    WIN PERCENTAGE
   ===================================================== */
 
-  getWinPercentage(
-    bubble: Bubble
-  ): number {
+  getWinPercentage(bubble: Bubble): number {
+    const totalGames = bubble.wins + bubble.losses;
 
-    return 0;
+    if (totalGames === 0) {
+      return 0;
+    }
+
+    return (bubble.wins / totalGames) * 100;
   }
+
+  clearFilters(): void {
+
+  this.searchTerm = '';
+
+  this.selectedTeam = null;
+
+  this.selectedConference = null;
+
+  this.selectedBubbleSize = 'all';
+
+  this.sortBy = 'rank';
+
+  this.teamFilterControl.setValue(null);
+
+  this.applyFilters();
+}
 }

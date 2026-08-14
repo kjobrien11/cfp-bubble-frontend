@@ -6,6 +6,6 @@ export interface Bubble {
   season: number;
   submissionTime: string;
   teams: Team[];
-  wins?: number;
-  losses?: number;
+  wins: number;
+  losses: number;
 }
