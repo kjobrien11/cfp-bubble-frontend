@@ -1,50 +1,60 @@
 import { Component, OnInit } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { AsyncPipe, DecimalPipe } from '@angular/common';
+import {
+  FormControl,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
+import { Observable, map, startWith } from 'rxjs';
+
+import {
+  MatAutocompleteModule,
+  MatAutocompleteSelectedEvent
+} from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+
 import { Team } from '../dtos/team';
 import { Bubble } from '../dtos/bubble';
 import { TeamService } from '../services/team.service';
 import { BubbleService } from '../services/bubble.service';
 
-
-
-
-
-
 @Component({
   selector: 'app-leaderboard',
-
   standalone: true,
 
   imports: [
     FormsModule,
+    ReactiveFormsModule,
     DecimalPipe,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatAutocompleteModule,
+    AsyncPipe
   ],
 
   templateUrl: './leaderboard.component.html',
-
   styleUrl: './leaderboard.component.css'
 })
-export class LeaderboardComponent
-  implements OnInit {
+export class LeaderboardComponent implements OnInit {
+
+  /* =====================================================
+   DATA
+  ===================================================== */
 
   bubbles: Bubble[] = [];
   filteredBubbles: Bubble[] = [];
+
   teams: Team[] = [];
   conferences: string[] = [];
 
-
   /* =====================================================
-     STATISTICS
-     ===================================================== */
+   STATISTICS
+  ===================================================== */
 
   totalBubbles = 0;
 
@@ -56,10 +66,9 @@ export class LeaderboardComponent
 
   averageBubbleSize = 0;
 
-
   /* =====================================================
-     FILTERS
-     ===================================================== */
+   FILTERS
+  ===================================================== */
 
   searchTerm = '';
 
@@ -71,36 +80,151 @@ export class LeaderboardComponent
 
   sortBy = 'rank';
 
-  constructor(private teamService: TeamService, private bubbleService: BubbleService) { }
+  /* =====================================================
+   TEAM AUTOCOMPLETE
+  ===================================================== */
+
+  teamFilterControl =
+    new FormControl<Team | null>(null);
+
+  filteredTeams!: Observable<Team[]>;
+
+  constructor(
+    private teamService: TeamService,
+    private bubbleService: BubbleService
+  ) {}
 
   /* =====================================================
-     INIT
-     ===================================================== */
+   INIT
+  ===================================================== */
 
   ngOnInit(): void {
 
-    this.bubbleService.getBubbles().subscribe({
-      next: data => {
-        this.bubbles = data;
+    this.loadTeams();
 
-        console.log('Bubbles:', this.bubbles);
+    this.loadBubbles();
+
+    this.filteredTeams =
+      this.teamFilterControl.valueChanges.pipe(
+        startWith(null),
+        map(value => {
+
+          const search =
+            typeof value === 'string'
+              ? value
+              : value?.schoolName ?? '';
+
+          return this.filterTeams(search);
+        })
+      );
+  }
+
+  /* =====================================================
+   LOAD TEAMS
+  ===================================================== */
+
+  private loadTeams(): void {
+
+    this.teamService.getTeams().subscribe({
+      next: teams => {
+
+        this.teams = teams;
+
+        this.buildConferences();
+      },
+
+      error: err => {
+        console.error(
+          'Failed to load teams:',
+          err
+        );
+      }
+    });
+  }
+
+  /* =====================================================
+   LOAD BUBBLES
+  ===================================================== */
+
+  private loadBubbles(): void {
+
+    this.bubbleService.getBubbles().subscribe({
+      next: bubbles => {
+
+        this.bubbles = bubbles;
+
+        console.log(
+          'Bubbles:',
+          this.bubbles
+        );
 
         this.calculateStatistics();
 
         this.applyFilters();
       },
+
       error: err => {
-        console.error('Failed to load bubbles:', err);
+        console.error(
+          'Failed to load bubbles:',
+          err
+        );
       }
     });
-
-
   }
 
+  /* =====================================================
+   TEAM FILTERING
+  ===================================================== */
+
+  private filterTeams(
+    value: string
+  ): Team[] {
+
+    const filterValue =
+      value.toLowerCase();
+
+    return this.teams.filter(team =>
+      team.schoolName
+        .toLowerCase()
+        .includes(filterValue) ||
+
+      team.abbreviation
+        .toLowerCase()
+        .includes(filterValue)
+    );
+  }
+
+  displayTeam(
+    team: Team | null
+  ): string {
+
+    return team
+      ? team.schoolName
+      : '';
+  }
+
+  onTeamFilterSelected(
+    event: MatAutocompleteSelectedEvent
+  ): void {
+
+    this.selectedTeam =
+      event.option.value as Team;
+
+    this.applyFilters();
+  }
+
+  clearTeamFilter(): void {
+
+    this.selectedTeam = null;
+
+    this.teamFilterControl.setValue(null);
+
+    this.applyFilters();
+  }
 
   /* =====================================================
-     SET DATA
-     ===================================================== */
+   SET DATA
+  ===================================================== */
 
   setLeaderboardData(
     bubbles: Bubble[],
@@ -116,46 +240,48 @@ export class LeaderboardComponent
     this.calculateStatistics();
 
     this.applyFilters();
-
   }
 
-
   /* =====================================================
-     CONFERENCES
-     ===================================================== */
+   CONFERENCES
+  ===================================================== */
 
   private buildConferences(): void {
 
     this.conferences = [
       ...new Set(
         this.teams
-          .map(team => team.conferenceName)
+          .map(team =>
+            team.conferenceName
+          )
           .filter(Boolean)
       )
     ].sort();
-
   }
 
-
   /* =====================================================
-     STATISTICS
-     ===================================================== */
+   STATISTICS
+  ===================================================== */
 
   private calculateStatistics(): void {
 
     this.totalBubbles =
       this.bubbles.length;
 
+    this.bubbleService
+      .getUniqueUserCount()
+      .subscribe({
+        next: users => {
+          this.uniquePlayers = users;
+        },
 
-    /*
-     * Replace this with the value from your
-     * backend once your endpoint provides it.
-     */
-
-    this.bubbleService.getUniqueUserCount().subscribe(users =>{
-      this.uniquePlayers = users;
-    })
-
+        error: err => {
+          console.error(
+            'Failed to load unique user count:',
+            err
+          );
+        }
+      });
 
     /* Average bubble size */
 
@@ -175,84 +301,109 @@ export class LeaderboardComponent
       this.averageBubbleSize =
         totalTeams /
         this.bubbles.length;
-
     }
 
-
     this.calculateMostPopularTeam();
-
   }
 
-
   /* =====================================================
-     MOST POPULAR TEAM
-     ===================================================== */
+   MOST POPULAR TEAM
+  ===================================================== */
 
   private calculateMostPopularTeam(): void {
 
-  if (this.bubbles.length === 0) {
-    this.mostPopularTeam = null;
-    this.mostPopularTeamPercentage = 0;
-    return;
-  }
+    if (this.bubbles.length === 0) {
 
-  const counts = new Map<number, number>();
-  const teamMap = new Map<number, Team>();
+      this.mostPopularTeam = null;
 
-  for (const bubble of this.bubbles) {
+      this.mostPopularTeamPercentage = 0;
 
-    const uniqueTeams = new Map<number, Team>();
-
-    for (const team of bubble.teams) {
-      uniqueTeams.set(team.espnId, team);
+      return;
     }
 
-    for (const [teamId, team] of uniqueTeams) {
+    const counts =
+      new Map<number, number>();
 
-      counts.set(
-        teamId,
-        (counts.get(teamId) ?? 0) + 1
+    const teamMap =
+      new Map<number, Team>();
+
+    for (const bubble of this.bubbles) {
+
+      const uniqueTeams =
+        new Map<number, Team>();
+
+      for (const team of bubble.teams) {
+
+        uniqueTeams.set(
+          team.espnId,
+          team
+        );
+      }
+
+      for (
+        const [teamId, team]
+        of uniqueTeams
+      ) {
+
+        counts.set(
+          teamId,
+          (counts.get(teamId) ?? 0) + 1
+        );
+
+        teamMap.set(
+          teamId,
+          team
+        );
+      }
+    }
+
+    let mostPopularId:
+      number | null = null;
+
+    let highestCount = 0;
+
+    for (
+      const [teamId, count]
+      of counts
+    ) {
+
+      if (count > highestCount) {
+
+        highestCount = count;
+
+        mostPopularId = teamId;
+      }
+    }
+
+    if (mostPopularId === null) {
+
+      this.mostPopularTeam = null;
+
+      this.mostPopularTeamPercentage = 0;
+
+      return;
+    }
+
+    this.mostPopularTeam =
+      teamMap.get(mostPopularId) ?? null;
+
+    this.mostPopularTeamPercentage =
+      Math.round(
+        (
+          highestCount /
+          this.bubbles.length
+        ) * 100
       );
-
-      teamMap.set(teamId, team);
-    }
   }
-
-  let mostPopularId: number | null = null;
-  let highestCount = 0;
-
-  for (const [teamId, count] of counts) {
-
-    if (count > highestCount) {
-      highestCount = count;
-      mostPopularId = teamId;
-    }
-  }
-
-  if (mostPopularId === null) {
-    this.mostPopularTeam = null;
-    this.mostPopularTeamPercentage = 0;
-    return;
-  }
-
-  this.mostPopularTeam =
-    teamMap.get(mostPopularId) ?? null;
-
-  this.mostPopularTeamPercentage =
-    Math.round(
-      (highestCount / this.bubbles.length) * 100
-    );
-}
 
   /* =====================================================
-     FILTERS
-     ===================================================== */
+   FILTERS
+  ===================================================== */
 
   applyFilters(): void {
 
     let results =
       [...this.bubbles];
-
 
     /* Search */
 
@@ -263,7 +414,6 @@ export class LeaderboardComponent
           .trim()
           .toLowerCase();
 
-
       results =
         results.filter(
           bubble =>
@@ -271,9 +421,7 @@ export class LeaderboardComponent
               .toLowerCase()
               .includes(search)
         );
-
     }
-
 
     /* Team */
 
@@ -288,9 +436,7 @@ export class LeaderboardComponent
                 this.selectedTeam!.espnId
             )
         );
-
     }
-
 
     /* Conference */
 
@@ -305,9 +451,7 @@ export class LeaderboardComponent
                 this.selectedConference
             )
         );
-
     }
-
 
     /* Bubble size */
 
@@ -319,7 +463,6 @@ export class LeaderboardComponent
           )
       );
 
-
     /* Sort */
 
     results.sort(
@@ -327,22 +470,13 @@ export class LeaderboardComponent
         this.compareBubbles(a, b)
     );
 
-
-    /*
-     * Since there is no pagination,
-     * the entire filtered dataset is
-     * displayed.
-     */
-
     this.filteredBubbles =
       results;
-
   }
 
-
   /* =====================================================
-     BUBBLE SIZE FILTER
-     ===================================================== */
+   BUBBLE SIZE FILTER
+  ===================================================== */
 
   private matchesBubbleSize(
     size: number
@@ -357,14 +491,12 @@ export class LeaderboardComponent
           size <= 4
         );
 
-
       case 'medium':
 
         return (
           size >= 5 &&
           size <= 8
         );
-
 
       case 'large':
 
@@ -373,26 +505,21 @@ export class LeaderboardComponent
           size <= 12
         );
 
-
       case 'xlarge':
 
         return size >= 13;
-
 
       case 'all':
 
       default:
 
         return true;
-
     }
-
   }
 
-
   /* =====================================================
-     SORT
-     ===================================================== */
+   SORT
+  ===================================================== */
 
   private compareBubbles(
     a: Bubble,
@@ -401,7 +528,6 @@ export class LeaderboardComponent
 
     switch (this.sortBy) {
 
-
       case 'winPercentage':
 
         return (
@@ -409,27 +535,16 @@ export class LeaderboardComponent
           this.getWinPercentage(a)
         );
 
-
       case 'record':
 
-        return (
-          0
-          // b.wins -
-          // a.wins
-        );
-
+        return 0;
 
       case 'size':
-
-        /*
-         * Smaller bubbles rank higher.
-         */
 
         return (
           a.teams.length -
           b.teams.length
         );
-
 
       case 'alphabetical':
 
@@ -441,50 +556,22 @@ export class LeaderboardComponent
             )
         );
 
-
       case 'rank':
 
       default:
 
-        /*
-         * Preserve the ranking supplied
-         * by the backend.
-         */
-
         return 0;
-
     }
-
   }
 
-
   /* =====================================================
-     WIN PERCENTAGE
-     ===================================================== */
+   WIN PERCENTAGE
+  ===================================================== */
 
   getWinPercentage(
     bubble: Bubble
   ): number {
 
     return 0;
-
-    // const totalGames =
-    //   bubble.wins +
-    //   bubble.losses;
-
-
-    // if (totalGames === 0) {
-
-    //   return 0;
-
-    // }
-
-
-    // return (
-    //   bubble.wins /
-    //   totalGames
-    // ) * 100;
-
   }
-
 }

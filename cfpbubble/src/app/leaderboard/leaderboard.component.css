@@ -751,4 +751,41 @@
         border-radius: 1rem;
     }
 
+    
+
+}
+
+.team-filter-field {
+    width: 100%;
+}
+
+.team-filter-field .mat-mdc-form-field-flex {
+    align-items: center;
+}
+
+.team-filter-field .mat-mdc-form-field-infix {
+    min-height: 56px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+
+    display: flex;
+    align-items: center;
+}
+
+.team-filter-field .mat-mdc-input-element {
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+}
+
+.team-filter-field .mat-mdc-form-field-icon-prefix {
+    padding: 0 .5rem 0 0;
+    display: flex;
+    align-items: center;
+}
+
+.team-filter-field .mat-mdc-form-field-icon-prefix .mat-icon {
+    margin: 0;
+    display: flex;
+    align-items: center;
 }

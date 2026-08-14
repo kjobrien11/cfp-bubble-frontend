@@ -155,44 +155,54 @@
     <div class="filter-group">
 
       <label>
-        <mat-icon>sports_football</mat-icon>
-        Contains Team
-      </label>
+  <mat-icon>sports_football</mat-icon>
+  Contains Team
+</label>
 
-      <mat-form-field appearance="outline">
+<mat-form-field appearance="outline" class="team-filter-field">
 
-        <mat-select
-          [(ngModel)]="selectedTeam"
-          (selectionChange)="applyFilters()"
-          placeholder="All teams">
+  <mat-label>Search teams</mat-label>
 
-          <mat-option [value]="null">
-            All Teams
-          </mat-option>
+  <mat-icon matPrefix>
+    search
+  </mat-icon>
 
-          @for (team of teams; track team.espnId) {
+  <input
+    matInput
+    placeholder="All teams"
+    [formControl]="teamFilterControl"
+    [matAutocomplete]="teamAuto">
 
-            <mat-option [value]="team">
+  <mat-autocomplete
+    #teamAuto="matAutocomplete"
+    [displayWith]="displayTeam"
+    (optionSelected)="onTeamFilterSelected($event)">
 
-              <div class="team-option">
+    <mat-option [value]="null">
+      All Teams
+    </mat-option>
 
-                <img
-                  [src]="team.logoUrl"
-                  [alt]="team.schoolName">
+    @for (team of filteredTeams | async; track team.espnId) {
 
-                <span>
-                  {{ team.schoolName }}
-                </span>
+      <mat-option [value]="team">
 
-              </div>
+        <div class="team-option">
 
-            </mat-option>
+          <img
+            [src]="'https://a.espncdn.com/i/teamlogos/ncaa/500/' + team.espnId + '.png'"
+            [alt]="team.schoolName">
 
-          }
+          <span>{{ team.schoolName }}</span>
 
-        </mat-select>
+        </div>
 
-      </mat-form-field>
+      </mat-option>
+
+    }
+
+  </mat-autocomplete>
+
+</mat-form-field>
 
     </div>
 
