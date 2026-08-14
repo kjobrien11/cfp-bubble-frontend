@@ -1,0 +1,511 @@
+<div class="leaderboard-page">
+
+  <!-- =====================================================
+       STATISTICS
+       ===================================================== -->
+
+  <section class="stats-grid">
+
+    <div class="stat-card">
+
+      <div class="stat-icon purple">
+        <mat-icon>groups</mat-icon>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Total Bubbles
+        </span>
+
+        <span class="stat-value">
+          {{ totalBubbles | number }}
+        </span>
+
+        <span class="stat-subtitle">
+          Submitted this season
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div class="stat-icon blue">
+        <mat-icon>person_outline</mat-icon>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Unique Players
+        </span>
+
+        <span class="stat-value">
+          {{ uniquePlayers | number }}
+        </span>
+
+        <span class="stat-subtitle">
+          Players competing
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div class="stat-icon green team-stat-icon">
+
+        @if (mostPopularTeam) {
+
+          <img
+            [src]="mostPopularTeam.logoUrl"
+            [alt]="mostPopularTeam.schoolName">
+
+        }
+
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Most Popular Team
+        </span>
+
+        @if (mostPopularTeam) {
+
+          <span class="popular-team-name">
+            {{ mostPopularTeam.schoolName }}
+          </span>
+
+          <span class="popular-percentage">
+            Picked by {{ mostPopularTeamPercentage }}%
+          </span>
+
+        }
+
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div class="stat-icon orange">
+        <mat-icon>track_changes</mat-icon>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Average Bubble Size
+        </span>
+
+        <span class="stat-value">
+          {{ averageBubbleSize | number:'1.1-1' }}
+        </span>
+
+        <span class="stat-subtitle">
+          Teams per bubble
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       FILTERS
+       ===================================================== -->
+
+  <section class="filter-card">
+
+
+    <!-- Search -->
+
+    <div class="filter-group search-filter">
+
+      <label>
+        <mat-icon>search</mat-icon>
+        Search Bubble
+      </label>
+
+      <mat-form-field appearance="outline">
+
+        <input
+          matInput
+          [(ngModel)]="searchTerm"
+          placeholder="Search bubbles..."
+          (input)="applyFilters()">
+
+      </mat-form-field>
+
+    </div>
+
+
+    <!-- Team -->
+
+    <div class="filter-group">
+
+      <label>
+        <mat-icon>sports_football</mat-icon>
+        Contains Team
+      </label>
+
+      <mat-form-field appearance="outline">
+
+        <mat-select
+          [(ngModel)]="selectedTeam"
+          (selectionChange)="applyFilters()"
+          placeholder="All teams">
+
+          <mat-option [value]="null">
+            All Teams
+          </mat-option>
+
+          @for (team of teams; track team.espnId) {
+
+            <mat-option [value]="team">
+
+              <div class="team-option">
+
+                <img
+                  [src]="team.logoUrl"
+                  [alt]="team.schoolName">
+
+                <span>
+                  {{ team.schoolName }}
+                </span>
+
+              </div>
+
+            </mat-option>
+
+          }
+
+        </mat-select>
+
+      </mat-form-field>
+
+    </div>
+
+
+    <!-- Conference -->
+
+    <div class="filter-group">
+
+      <label>
+        <mat-icon>account_balance</mat-icon>
+        Conference
+      </label>
+
+      <mat-form-field appearance="outline">
+
+        <mat-select
+          [(ngModel)]="selectedConference"
+          (selectionChange)="applyFilters()"
+          placeholder="All conferences">
+
+          <mat-option [value]="null">
+            All Conferences
+          </mat-option>
+
+          @for (
+            conference of conferences;
+            track conference
+          ) {
+
+            <mat-option [value]="conference">
+              {{ conference }}
+            </mat-option>
+
+          }
+
+        </mat-select>
+
+      </mat-form-field>
+
+    </div>
+
+
+    <!-- Bubble Size -->
+
+    <div class="filter-group">
+
+      <label>
+        <mat-icon>filter_alt</mat-icon>
+        Bubble Size
+      </label>
+
+      <mat-form-field appearance="outline">
+
+        <mat-select
+          [(ngModel)]="selectedBubbleSize"
+          (selectionChange)="applyFilters()">
+
+          <mat-option value="all">
+            All Sizes
+          </mat-option>
+
+          <mat-option value="small">
+            1–4 Teams
+          </mat-option>
+
+          <mat-option value="medium">
+            5–8 Teams
+          </mat-option>
+
+          <mat-option value="large">
+            9–12 Teams
+          </mat-option>
+
+          <mat-option value="xlarge">
+            13+ Teams
+          </mat-option>
+
+        </mat-select>
+
+      </mat-form-field>
+
+    </div>
+
+
+    <!-- Sort -->
+
+    <div class="filter-group">
+
+      <label>
+        <mat-icon>sort</mat-icon>
+        Sort By
+      </label>
+
+      <mat-form-field appearance="outline">
+
+        <mat-select
+          [(ngModel)]="sortBy"
+          (selectionChange)="applyFilters()">
+
+          <mat-option value="rank">
+            Current Rank
+          </mat-option>
+
+          <mat-option value="winPercentage">
+            Bubble Win Percentage
+          </mat-option>
+
+          <mat-option value="record">
+            Bubble Record
+          </mat-option>
+
+          <mat-option value="size">
+            Bubble Size
+          </mat-option>
+
+          <mat-option value="alphabetical">
+            Alphabetical
+          </mat-option>
+
+        </mat-select>
+
+      </mat-form-field>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       RESULTS
+       ===================================================== -->
+
+  <div class="results-info">
+
+    <span>
+      Showing {{ filteredBubbles.length | number }} bubbles
+    </span>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       LEADERBOARD
+       ===================================================== -->
+
+  <section class="leaderboard-card">
+
+    <!-- Header -->
+
+    <div class="leaderboard-header">
+
+      <div class="column-rank">
+        Rank
+      </div>
+
+      <div class="column-name">
+        Bubble
+      </div>
+
+      <div class="column-teams">
+        Teams
+      </div>
+
+      <div class="column-record">
+        Record
+      </div>
+
+      <div class="column-win">
+        Win %
+      </div>
+
+      <div class="column-size">
+        Size
+      </div>
+
+    </div>
+
+
+    <!-- Rows -->
+
+    @for (
+      bubble of filteredBubbles;
+      track bubble.id;
+      let i = $index
+    ) {
+
+      <div class="leaderboard-row">
+
+
+        <!-- Rank -->
+
+        <div class="rank-cell">
+
+          <span
+            class="rank-number"
+            [class.top-three]="i < 3">
+
+            {{ i + 1 }}
+
+          </span>
+
+        </div>
+
+
+        <!-- Bubble -->
+
+        <div class="bubble-name-cell">
+
+          <strong>
+            {{ bubble.name }}
+          </strong>
+
+        </div>
+
+
+        <!-- Teams -->
+
+        <div class="teams-cell">
+
+          @for (
+            team of bubble.teams.slice(0, 10);
+            track team.espnId
+          ) {
+
+            <img
+              class="team-logo"
+              [src]="team.logoUrl"
+              [alt]="team.schoolName"
+              [title]="team.schoolName">
+
+          }
+
+          @if (bubble.teams.length > 10) {
+
+            <span class="more-teams">
+              +{{ bubble.teams.length - 10 }}
+            </span>
+
+          }
+
+        </div>
+
+
+        <!-- Record -->
+
+        <div class="record-cell">
+
+          {{ bubble.wins }}–{{ bubble.losses }}
+
+        </div>
+
+
+        <!-- Win Percentage -->
+
+        <div class="win-cell">
+
+          {{ getWinPercentage(bubble) | number:'1.1-1' }}%
+
+        </div>
+
+
+        <!-- Size -->
+
+        <div class="size-cell">
+
+          <span
+            class="size-badge"
+            [class.best]="bubble.teams.length <= 5"
+            [class.small]="
+              bubble.teams.length > 5 &&
+              bubble.teams.length <= 7
+            "
+            [class.medium]="
+              bubble.teams.length > 7 &&
+              bubble.teams.length <= 10
+            "
+            [class.large]="bubble.teams.length > 10">
+
+            {{ bubble.teams.length }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+    }
+
+
+    <!-- Empty -->
+
+    @if (filteredBubbles.length === 0) {
+
+      <div class="empty-state">
+
+        <mat-icon>
+          search_off
+        </mat-icon>
+
+        <h3>
+          No bubbles found
+        </h3>
+
+        <p>
+          Try changing your filters.
+        </p>
+
+      </div>
+
+    }
+
+  </section>
+
+</div>

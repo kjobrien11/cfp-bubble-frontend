@@ -1,0 +1,754 @@
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.leaderboard-page {
+    width: min(100% - 2rem, 95rem);
+
+    margin: 0 auto;
+
+    padding: 2rem 0 4rem;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   STATISTICS
+   ========================================================= */
+
+.stats-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 1rem;
+
+    margin-bottom: 1.5rem;
+}
+
+
+.stat-card {
+    min-height: 9rem;
+
+    padding: 1.35rem;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 1rem;
+
+    box-sizing: border-box;
+
+    background: rgba(255, 255, 255, .96);
+
+    border: 1px solid rgba(226, 223, 244, .85);
+
+    border-radius: 1.25rem;
+
+    box-shadow:
+        0 .75rem 2rem rgba(65, 55, 145, .06);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.stat-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 1rem 2.5rem rgba(65, 55, 145, .1);
+}
+
+
+.stat-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+
+    flex: 0 0 3.5rem;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 1rem;
+}
+
+
+.stat-icon mat-icon {
+    width: 1.7rem;
+    height: 1.7rem;
+
+    font-size: 1.7rem;
+}
+
+
+.stat-icon.purple {
+    color: #6348e8;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0edff,
+            #e5e0ff
+        );
+}
+
+
+.stat-icon.blue {
+    color: #1685e8;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e9f5ff,
+            #dceeff
+        );
+}
+
+
+.stat-icon.green {
+    background:
+        linear-gradient(
+            135deg,
+            #e9f8e9,
+            #d9f1dd
+        );
+}
+
+
+.stat-icon.orange {
+    color: #f07820;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff1e6,
+            #ffe5d2
+        );
+}
+
+
+.team-stat-icon img {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    object-fit: contain;
+}
+
+
+.stat-content {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.stat-label {
+    color: #697188;
+
+    font-size: .78rem;
+
+    font-weight: 600;
+
+    margin-bottom: .3rem;
+}
+
+
+.stat-value {
+    color: #111936;
+
+    font-size: 1.9rem;
+
+    line-height: 1.1;
+
+    font-weight: 800;
+
+    letter-spacing: -.04em;
+}
+
+
+.stat-subtitle {
+    color: #9198aa;
+
+    font-size: .72rem;
+
+    margin-top: .3rem;
+}
+
+
+.popular-team-name {
+    color: #111936;
+
+    font-size: 1.25rem;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+.popular-percentage {
+    color: #23894a;
+
+    font-size: .72rem;
+
+    font-weight: 700;
+
+    margin-top: .25rem;
+}
+
+
+/* =========================================================
+   FILTERS
+   ========================================================= */
+
+.filter-card {
+    display: grid;
+
+    grid-template-columns:
+        1.4fr
+        1.25fr
+        1fr
+        .9fr
+        1fr;
+
+    gap: 1rem;
+
+    padding: 1.2rem 1.35rem;
+
+    box-sizing: border-box;
+
+    background: rgba(255, 255, 255, .96);
+
+    border: 1px solid rgba(226, 223, 244, .85);
+
+    border-radius: 1.25rem;
+
+    box-shadow:
+        0 .75rem 2rem rgba(65, 55, 145, .05);
+
+    margin-bottom: 1rem;
+}
+
+
+.filter-group {
+    min-width: 0;
+}
+
+
+.filter-group > label {
+    display: flex;
+
+    align-items: center;
+
+    gap: .35rem;
+
+    color: #697188;
+
+    font-size: .7rem;
+
+    font-weight: 700;
+
+    margin-bottom: .35rem;
+}
+
+
+.filter-group > label mat-icon {
+    width: .9rem;
+    height: .9rem;
+
+    font-size: .9rem;
+}
+
+
+.filter-group mat-form-field {
+    width: 100%;
+}
+
+
+.filter-group
+::ng-deep
+.mat-mdc-form-field-subscript-wrapper {
+    display: none;
+}
+
+
+.filter-group
+::ng-deep
+.mat-mdc-text-field-wrapper {
+    background: #fafaff;
+}
+
+
+.filter-group
+::ng-deep
+.mat-mdc-form-field-infix {
+    min-height: 2.8rem;
+
+    padding-top: .65rem;
+    padding-bottom: .65rem;
+}
+
+
+.filter-group
+::ng-deep
+.mat-mdc-form-field-flex {
+    height: 2.8rem;
+}
+
+
+.team-option {
+    display: flex;
+
+    align-items: center;
+
+    gap: .65rem;
+}
+
+
+.team-option img {
+    width: 1.6rem;
+    height: 1.6rem;
+
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   RESULTS
+   ========================================================= */
+
+.results-info {
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin: .75rem .25rem;
+
+    color: #858da1;
+
+    font-size: .75rem;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   LEADERBOARD
+   ========================================================= */
+
+.leaderboard-card {
+    width: 100%;
+
+    overflow: hidden;
+
+    background: white;
+
+    border: 1px solid rgba(226, 223, 244, .85);
+
+    border-radius: 1.35rem;
+
+    box-shadow:
+        0 .9rem 2.5rem rgba(65, 55, 145, .06);
+}
+
+
+/* =========================================================
+   HEADER + ROW
+   ========================================================= */
+
+.leaderboard-header,
+.leaderboard-row {
+    display: grid;
+
+    grid-template-columns:
+        5rem
+        14rem
+        minmax(20rem, 1fr)
+        7rem
+        7rem
+        6rem;
+
+    align-items: center;
+}
+
+
+.leaderboard-header {
+    min-height: 3.5rem;
+
+    padding: 0 1.5rem;
+
+    box-sizing: border-box;
+
+    background: #fafaff;
+
+    border-bottom: 1px solid #ececf3;
+
+    color: #858da1;
+
+    font-size: .68rem;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: .06em;
+}
+
+
+.leaderboard-row {
+    min-height: 5.5rem;
+
+    padding: .65rem 1.5rem;
+
+    box-sizing: border-box;
+
+    border-bottom: 1px solid #f0f0f5;
+
+    transition:
+        background .15s ease;
+}
+
+
+.leaderboard-row:last-child {
+    border-bottom: none;
+}
+
+
+.leaderboard-row:hover {
+    background: #fafaff;
+}
+
+
+/* =========================================================
+   RANK
+   ========================================================= */
+
+.rank-cell {
+    display: flex;
+
+    align-items: center;
+}
+
+
+.rank-number {
+    width: 2rem;
+
+    color: #29314b;
+
+    font-size: 1.1rem;
+
+    font-weight: 800;
+}
+
+
+.rank-number.top-three {
+    color: #5d45df;
+
+    font-size: 1.25rem;
+}
+
+
+/* =========================================================
+   BUBBLE NAME
+   ========================================================= */
+
+.bubble-name-cell {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.bubble-name-cell strong {
+    color: #17203d;
+
+    font-size: .95rem;
+
+    font-weight: 750;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   TEAMS
+   ========================================================= */
+
+.teams-cell {
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: .4rem;
+
+    overflow: hidden;
+}
+
+
+.team-logo {
+    width: 2.25rem;
+    height: 2.25rem;
+
+    flex: 0 0 2.25rem;
+
+    object-fit: contain;
+
+    transition:
+        transform .15s ease;
+}
+
+
+.team-logo:hover {
+    transform: scale(1.18);
+}
+
+
+.more-teams {
+    height: 2.25rem;
+    min-width: 2.25rem;
+
+    padding: 0 .5rem;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    color: #6251c9;
+
+    background: #f0edff;
+
+    border-radius: .7rem;
+
+    font-size: .72rem;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   RECORD
+   ========================================================= */
+
+.record-cell {
+    color: #29314b;
+
+    font-size: .9rem;
+
+    font-weight: 750;
+}
+
+
+/* =========================================================
+   WIN %
+   ========================================================= */
+
+.win-cell {
+    color: #23894a;
+
+    font-size: .9rem;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   SIZE
+   ========================================================= */
+
+.size-cell {
+    display: flex;
+
+    align-items: center;
+}
+
+
+.size-badge {
+    min-width: 2.3rem;
+    height: 2rem;
+
+    padding: 0 .55rem;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: .65rem;
+
+    font-size: .75rem;
+
+    font-weight: 800;
+}
+
+
+.size-badge.best {
+    color: #168044;
+
+    background: #e7f7ed;
+}
+
+
+.size-badge.small {
+    color: #4d55b5;
+
+    background: #eeefff;
+}
+
+
+.size-badge.medium {
+    color: #a36714;
+
+    background: #fff3dc;
+}
+
+
+.size-badge.large {
+    color: #a34747;
+
+    background: #ffebeb;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-state {
+    min-height: 18rem;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    color: #858da1;
+}
+
+
+.empty-state mat-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    font-size: 2.5rem;
+
+    margin-bottom: .75rem;
+}
+
+
+.empty-state h3 {
+    margin: 0;
+
+    color: #29314b;
+
+    font-size: 1rem;
+}
+
+
+.empty-state p {
+    margin-top: .35rem;
+
+    font-size: .8rem;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .stats-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .filter-card {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+
+    .leaderboard-card {
+        overflow-x: auto;
+    }
+
+
+    .leaderboard-header,
+    .leaderboard-row {
+        min-width: 900px;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .leaderboard-page {
+        width: min(100% - 1rem, 95rem);
+
+        padding-top: 1rem;
+    }
+
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+
+        gap: .75rem;
+    }
+
+
+    .stat-card {
+        min-height: 6.5rem;
+
+        padding: 1rem;
+    }
+
+
+    .filter-card {
+        grid-template-columns: 1fr;
+
+        gap: .5rem;
+
+        padding: 1rem;
+    }
+
+
+    .results-info {
+        justify-content: flex-start;
+    }
+
+
+    .leaderboard-card {
+        border-radius: 1rem;
+    }
+
+}
