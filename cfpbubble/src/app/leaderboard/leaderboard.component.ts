@@ -6,22 +6,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { Team } from '../dtos/team';
+import { Bubble } from '../dtos/bubble';
+import { TeamService } from '../services/team.service';
+import { BubbleService } from '../services/bubble.service';
 
 
 
-export interface LeaderboardBubble {
 
-  id: string;
-
-  name: string;
-
-  teams: Team[];
-
-  wins: number;
-
-  losses: number;
-
-}
 
 
 @Component({
@@ -32,7 +23,6 @@ export interface LeaderboardBubble {
   imports: [
     FormsModule,
     DecimalPipe,
-
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
@@ -46,17 +36,9 @@ export interface LeaderboardBubble {
 export class LeaderboardComponent
   implements OnInit {
 
-
-  /* =====================================================
-     DATA
-     ===================================================== */
-
-  bubbles: LeaderboardBubble[] = [];
-
-  filteredBubbles: LeaderboardBubble[] = [];
-
+  bubbles: Bubble[] = [];
+  filteredBubbles: Bubble[] = [];
   teams: Team[] = [];
-
   conferences: string[] = [];
 
 
@@ -89,6 +71,7 @@ export class LeaderboardComponent
 
   sortBy = 'rank';
 
+  constructor(private teamService: TeamService, private bubbleService: BubbleService) { }
 
   /* =====================================================
      INIT
@@ -96,22 +79,21 @@ export class LeaderboardComponent
 
   ngOnInit(): void {
 
-    /*
-     * Your API call will eventually go here.
-     *
-     * Example:
-     *
-     * this.leaderboardService
-     *   .getLeaderboard()
-     *   .subscribe(data => {
-     *      this.setLeaderboardData(
-     *        data.bubbles,
-     *        data.teams
-     *      );
-     *   });
-     */
+    this.bubbleService.getBubbles().subscribe({
+      next: data => {
+        this.bubbles = data;
 
-    this.applyFilters();
+        console.log('Bubbles:', this.bubbles);
+
+        this.calculateStatistics();
+
+        this.applyFilters();
+      },
+      error: err => {
+        console.error('Failed to load bubbles:', err);
+      }
+    });
+
 
   }
 
@@ -121,7 +103,7 @@ export class LeaderboardComponent
      ===================================================== */
 
   setLeaderboardData(
-    bubbles: LeaderboardBubble[],
+    bubbles: Bubble[],
     teams: Team[]
   ): void {
 
@@ -170,7 +152,9 @@ export class LeaderboardComponent
      * backend once your endpoint provides it.
      */
 
-    this.uniquePlayers = 0;
+    this.bubbleService.getUniqueUserCount().subscribe(users =>{
+      this.uniquePlayers = users;
+    })
 
 
     /* Average bubble size */
@@ -206,89 +190,59 @@ export class LeaderboardComponent
 
   private calculateMostPopularTeam(): void {
 
-    if (this.bubbles.length === 0) {
-
-      this.mostPopularTeam = null;
-
-      this.mostPopularTeamPercentage = 0;
-
-      return;
-
-    }
-
-
-    const counts =
-      new Map<number, number>();
-
-
-    for (const bubble of this.bubbles) {
-
-      const uniqueTeamIds =
-        new Set(
-          bubble.teams.map(
-            team => team.espnId
-          )
-        );
-
-
-      for (const teamId of uniqueTeamIds) {
-
-        counts.set(
-          teamId,
-          (counts.get(teamId) ?? 0) + 1
-        );
-
-      }
-
-    }
-
-
-    let mostPopularId: number | null = null;
-
-    let highestCount = 0;
-
-
-    for (const [teamId, count] of counts) {
-
-      if (count > highestCount) {
-
-        highestCount = count;
-
-        mostPopularId = teamId;
-
-      }
-
-    }
-
-
-    if (mostPopularId === null) {
-
-      this.mostPopularTeam = null;
-
-      this.mostPopularTeamPercentage = 0;
-
-      return;
-
-    }
-
-
-    this.mostPopularTeam =
-      this.teams.find(
-        team =>
-          team.espnId === mostPopularId
-      ) ?? null;
-
-
-    this.mostPopularTeamPercentage =
-      Math.round(
-        (
-          highestCount /
-          this.bubbles.length
-        ) * 100
-      );
-
+  if (this.bubbles.length === 0) {
+    this.mostPopularTeam = null;
+    this.mostPopularTeamPercentage = 0;
+    return;
   }
 
+  const counts = new Map<number, number>();
+  const teamMap = new Map<number, Team>();
+
+  for (const bubble of this.bubbles) {
+
+    const uniqueTeams = new Map<number, Team>();
+
+    for (const team of bubble.teams) {
+      uniqueTeams.set(team.espnId, team);
+    }
+
+    for (const [teamId, team] of uniqueTeams) {
+
+      counts.set(
+        teamId,
+        (counts.get(teamId) ?? 0) + 1
+      );
+
+      teamMap.set(teamId, team);
+    }
+  }
+
+  let mostPopularId: number | null = null;
+  let highestCount = 0;
+
+  for (const [teamId, count] of counts) {
+
+    if (count > highestCount) {
+      highestCount = count;
+      mostPopularId = teamId;
+    }
+  }
+
+  if (mostPopularId === null) {
+    this.mostPopularTeam = null;
+    this.mostPopularTeamPercentage = 0;
+    return;
+  }
+
+  this.mostPopularTeam =
+    teamMap.get(mostPopularId) ?? null;
+
+  this.mostPopularTeamPercentage =
+    Math.round(
+      (highestCount / this.bubbles.length) * 100
+    );
+}
 
   /* =====================================================
      FILTERS
@@ -441,8 +395,8 @@ export class LeaderboardComponent
      ===================================================== */
 
   private compareBubbles(
-    a: LeaderboardBubble,
-    b: LeaderboardBubble
+    a: Bubble,
+    b: Bubble
   ): number {
 
     switch (this.sortBy) {
@@ -459,8 +413,9 @@ export class LeaderboardComponent
       case 'record':
 
         return (
-          b.wins -
-          a.wins
+          0
+          // b.wins -
+          // a.wins
         );
 
 
@@ -508,25 +463,27 @@ export class LeaderboardComponent
      ===================================================== */
 
   getWinPercentage(
-    bubble: LeaderboardBubble
+    bubble: Bubble
   ): number {
 
-    const totalGames =
-      bubble.wins +
-      bubble.losses;
+    return 0;
+
+    // const totalGames =
+    //   bubble.wins +
+    //   bubble.losses;
 
 
-    if (totalGames === 0) {
+    // if (totalGames === 0) {
 
-      return 0;
+    //   return 0;
 
-    }
+    // }
 
 
-    return (
-      bubble.wins /
-      totalGames
-    ) * 100;
+    // return (
+    //   bubble.wins /
+    //   totalGames
+    // ) * 100;
 
   }
 
