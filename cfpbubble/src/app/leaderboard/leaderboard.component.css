@@ -485,8 +485,8 @@ HEADER + ROW
         14rem
         minmax(20rem, 1fr)
         7rem
-        7rem
-        6rem;
+        6rem
+        4rem;
 
     align-items: center;
 }
