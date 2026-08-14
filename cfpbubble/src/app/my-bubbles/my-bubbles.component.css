@@ -1,10 +1,10 @@
 /* =========================================================
-   BUBBLE ACTIONS
-   ========================================================= */
-
+BUBBLE ACTIONS
+========================================================= */
 .bubble-actions {
+    width: calc(100% - 2rem);
 
-    margin: 0 auto;
+    margin: 1rem;
 
     min-height: 8.5rem;
 
@@ -15,12 +15,13 @@
     display: flex;
     align-items: center;
 
+    gap: 1rem;
+
     background: rgba(255, 255, 255, .94);
 
     border: 1px solid rgba(226, 223, 244, .9);
 
     border-radius: 1.5rem;
-    margin: 1rem;
 
     box-shadow:
         0 .75rem 2rem rgba(65, 55, 145, .07);
@@ -30,8 +31,8 @@
 
 
 /* =========================================================
-   INDIVIDUAL ACTIONS
-   ========================================================= */
+INDIVIDUAL ACTIONS
+========================================================= */
 
 .action-card {
     display: flex;
@@ -40,6 +41,8 @@
     gap: 1rem;
 
     box-sizing: border-box;
+
+    min-width: 0;
 }
 
 .create-card {
@@ -55,14 +58,14 @@
 
 
 /* =========================================================
-   ICON
-   ========================================================= */
+ICON
+========================================================= */
 
 .action-icon {
     width: 3.5rem;
     height: 3.5rem;
 
-    flex-shrink: 0;
+    flex: 0 0 3.5rem;
 
     display: flex;
     align-items: center;
@@ -89,8 +92,8 @@
 
 
 /* =========================================================
-   TEXT
-   ========================================================= */
+TEXT
+========================================================= */
 
 .action-content {
     min-width: 0;
@@ -120,8 +123,8 @@
 
 
 /* =========================================================
-   CREATE BUTTON
-   ========================================================= */
+CREATE BUTTON
+========================================================= */
 
 .create-card .action-content {
     display: flex;
@@ -129,6 +132,8 @@
     flex-direction: column;
 
     align-items: flex-start;
+
+    min-width: 0;
 }
 
 .create-button {
@@ -157,42 +162,24 @@
 
 
 /* =========================================================
-   DIVIDER
-   ========================================================= */
+DIVIDER
+========================================================= */
 
 .action-divider {
     width: 1px;
-
     height: 5rem;
 
-    margin: 0 2rem;
+    margin: 0 1.5rem;
 
     flex-shrink: 0;
 
     background: #e8e6ef;
 }
 
-.bubble-results {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-
-    align-items: flex-start;
-    justify-content: center;
-}
-
-.bubble-card {
-    flex: 0 0 auto;
-}
-
-.bubble-container {
-    width: 16rem;
-    height: 16rem;
-}
 
 /* =========================================================
-   SEARCH
-   ========================================================= */
+SEARCH
+========================================================= */
 
 .search-card {
     display: flex;
@@ -200,28 +187,36 @@
     align-items: center;
 
     gap: 1rem;
+
+    min-width: 0;
 }
 
 .search-card .action-content {
     width: 13rem;
 
-    flex-shrink: 0;
+    flex: 0 1 13rem;
+
+    min-width: 0;
 }
 
 .search-controls {
     flex: 1;
 
-    display: flex;
+    min-width: 0;
 
+    display: flex;
     align-items: center;
 
     gap: .75rem;
-
-    min-width: 0;
 }
+
 .email-field {
     flex: 1;
-    min-width: 12rem;
+
+    min-width: 0;
+
+    width: 100%;
+
     margin: 0;
 
     height: 3.5rem;
@@ -233,6 +228,7 @@
 
 .email-field .mat-mdc-form-field-flex {
     height: 3.5rem;
+
     align-items: center;
 }
 
@@ -240,6 +236,8 @@
     height: 3.5rem;
 
     min-width: 5.5rem;
+
+    flex: 0 0 auto;
 
     padding: 0 1.25rem;
 
@@ -252,97 +250,12 @@
 
 
 /* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 1000px) {
-
-    .bubble-actions {
-        padding: 1.25rem;
-
-        gap: 1rem;
-    }
-
-    .create-card {
-        width: 35%;
-        min-width: 16rem;
-    }
-
-    .action-divider {
-        margin: 0 1rem;
-    }
-
-    .search-card .action-content {
-        width: 11rem;
-    }
-
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 700px) {
-
-    .bubble-actions {
-        flex-direction: column;
-
-        align-items: stretch;
-
-        gap: 1.25rem;
-
-        padding: 1.25rem;
-
-        min-height: auto;
-    }
-
-    .action-card,
-    .create-card,
-    .search-card {
-        width: 100%;
-    }
-
-    .action-divider {
-        width: 100%;
-        height: 1px;
-
-        margin: 0;
-
-        background: #e8e6ef;
-    }
-
-    .search-card {
-        flex-wrap: wrap;
-    }
-
-    .search-card .action-content {
-        width: auto;
-
-        flex: 1;
-    }
-
-.search-controls {
-    flex: 1;
-
-    display: flex;
-    align-items: center;
-
-    gap: .75rem;
-    min-width: 0;
-}
-
-    .email-field {
-        min-width: 0;
-    }
-
-}
-
-/* =========================================================
 BUBBLE RESULTS
 ========================================================= */
 
 .bubble-results {
+    width: 100%;
+
     display: flex;
     flex-wrap: wrap;
 
@@ -352,21 +265,22 @@ BUBBLE RESULTS
     gap: 2rem;
 
     padding: 1.5rem 0 3rem;
+
+    box-sizing: border-box;
 }
 
-
-/* =========================================================
-BUBBLE CARD
-========================================================= */
-
 .bubble-card {
-    width: 20rem;
+    width: min(20rem, 100%);
+    max-width: 100%;
+
+    flex: 0 1 20rem;
+
+    box-sizing: border-box;
 
     display: flex;
     flex-direction: column;
 
     overflow: hidden;
-
     background: rgba(255, 255, 255, .94);
 
     border: 1px solid rgba(226, 223, 244, .9);
@@ -397,13 +311,13 @@ BUBBLE INFO
     padding: 1.25rem 1.25rem .75rem;
 }
 
-
 .bubble-header h2 {
     margin: 0;
 
     color: #17213d;
 
     font-size: 1.1rem;
+
     font-weight: 800;
 
     line-height: 1.3;
@@ -416,6 +330,7 @@ DETAILS
 
 .bubble-details {
     display: flex;
+
     flex-direction: column;
 
     gap: .65rem;
@@ -423,45 +338,46 @@ DETAILS
     margin-top: 1rem;
 }
 
-
 .bubble-detail {
     display: flex;
+
     align-items: center;
 
     gap: .65rem;
-}
 
+    min-width: 0;
+}
 
 .bubble-detail > mat-icon {
     width: 1.15rem;
     height: 1.15rem;
 
-    font-size: 1.15rem;
+    flex-shrink: 0;
 
     color: #705de0;
 
-    flex-shrink: 0;
+    font-size: 1.15rem;
 }
-
 
 .bubble-detail > div {
     display: flex;
+
     flex-direction: column;
 
     min-width: 0;
 }
 
-
 .detail-label {
     color: #9298aa;
 
     font-size: .65rem;
+
     font-weight: 700;
 
     letter-spacing: .06em;
+
     text-transform: uppercase;
 }
-
 
 .detail-value {
     margin-top: .1rem;
@@ -469,10 +385,13 @@ DETAILS
     color: #3f4760;
 
     font-size: .75rem;
+
     font-weight: 600;
 
     overflow: hidden;
+
     text-overflow: ellipsis;
+
     white-space: nowrap;
 }
 
@@ -481,9 +400,267 @@ DETAILS
 BUBBLE VISUALIZER
 ========================================================= */
 
-.bubble-container {
-    width: 18rem;
-    height: 18rem;
+/* =========================================================
+BUBBLE VISUALIZER
+========================================================= */
 
-    margin: 1rem;
+.bubble-container {
+    width: min(18rem, 100%);
+    max-width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    margin: 1rem auto 1.25rem;
+
+    box-sizing: border-box;
+
+    flex-shrink: 1;
+}
+
+
+/* =========================================================
+TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .bubble-actions {
+        padding: 1.25rem;
+
+        gap: 1rem;
+    }
+
+    .create-card {
+        width: 35%;
+
+        min-width: 16rem;
+    }
+
+    .action-divider {
+        margin: 0 1rem;
+    }
+
+    .search-card .action-content {
+        width: 11rem;
+
+        flex-basis: 11rem;
+    }
+
+    .bubble-results {
+        gap: 1.5rem;
+    }
+
+    .bubble-card {
+        width: 18rem;
+
+        flex-basis: 18rem;
+    }
+
+    .bubble-container {
+        width: 16rem;
+        height: 16rem;
+    }
+}
+
+
+/* =========================================================
+MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .bubble-actions {
+        width: calc(100% - 1rem);
+
+        margin: .5rem;
+
+        padding: 1rem;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 1rem;
+
+        min-height: auto;
+    }
+
+    .action-card,
+    .create-card,
+    .search-card {
+        width: 100%;
+
+        min-width: 0;
+    }
+
+    .create-card {
+        align-items: flex-start;
+    }
+
+    .action-divider {
+        width: 100%;
+        height: 1px;
+
+        margin: 0;
+
+        background: #e8e6ef;
+    }
+
+    /* Find Bubble section */
+
+    .search-card {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: .75rem;
+    }
+
+    .search-card .action-content {
+        width: 100%;
+
+        flex: none;
+    }
+
+    .search-controls {
+        width: 100%;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: .6rem;
+    }
+
+    .email-field {
+        width: 100%;
+
+        min-width: 0;
+    }
+
+    .search-button {
+        width: 100%;
+
+        min-width: 0;
+    }
+
+
+    /* Results */
+
+    .bubble-results {
+        gap: 1.25rem;
+
+        padding: 1rem .5rem 2rem;
+    }
+
+    .bubble-card {
+        width: min(100%, 20rem);
+
+        flex-basis: min(100%, 20rem);
+    }
+
+.bubble-container {
+        width: min(18rem, 100%);
+        max-width: 100%;
+
+        height: auto;
+
+        aspect-ratio: 1 / 1;
+
+        margin: 1rem auto 1.25rem;
+    }
+}
+
+
+/* =========================================================
+SMALL MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .bubble-actions {
+        width: calc(100% - 1rem);
+
+        margin: .5rem;
+
+        padding: .9rem;
+
+        border-radius: 1.25rem;
+    }
+
+    .action-icon {
+        width: 3rem;
+        height: 3rem;
+
+        flex-basis: 3rem;
+    }
+
+    .action-icon mat-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+
+        font-size: 1.5rem;
+    }
+
+    .action-content h2 {
+        font-size: .95rem;
+    }
+
+    .action-content p {
+        font-size: .72rem;
+    }
+
+    .create-button {
+        width: 100%;
+
+        margin-top: .6rem;
+    }
+
+    .search-card .action-content {
+        width: 100%;
+    }
+
+    .email-field {
+        height: 3.25rem;
+    }
+
+    .email-field .mat-mdc-text-field-wrapper {
+        height: 3.25rem;
+    }
+
+    .email-field .mat-mdc-form-field-flex {
+        height: 3.25rem;
+    }
+
+    .search-button {
+        height: 3.25rem;
+    }
+
+    .bubble-results {
+        gap: 1rem;
+
+        padding-left: .25rem;
+        padding-right: .25rem;
+    }
+
+    .bubble-card {
+        width: min(100%, 18rem);
+
+        flex-basis: min(100%, 18rem);
+
+        border-radius: 1.25rem;
+    }
+
+    .bubble-container {
+        width: min(16rem, 100%);
+        max-width: 100%;
+
+        height: auto;
+
+        aspect-ratio: 1 / 1;
+
+        margin: 1rem auto;
+    }
 }
