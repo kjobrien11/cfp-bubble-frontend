@@ -41,6 +41,10 @@ export class BubbleComponent implements OnInit {
   name = '';
   email = '';
 
+  submitSuccess = false;
+  submitError = false;
+  submitMessage = '';
+
   myControl = new FormControl<Team | null>(null);
 
   constructor(private teamService: TeamService, private bubbleService: BubbleService) { }
@@ -66,81 +70,94 @@ export class BubbleComponent implements OnInit {
     });
   }
 
-private filterTeams(value: string): Team[] {
-  const filterValue = value.toLowerCase();
+  private filterTeams(value: string): Team[] {
+    const filterValue = value.toLowerCase();
 
-  return this.teams
-    .filter(team =>
-      team.schoolName.toLowerCase().includes(filterValue) ||
-      team.abbreviation.toLowerCase().includes(filterValue)
-    )
-    .slice(0, 3);
-}
+    return this.teams
+      .filter(team =>
+        team.schoolName.toLowerCase().includes(filterValue) ||
+        team.abbreviation.toLowerCase().includes(filterValue)
+      )
+      .slice(0, 3);
+  }
 
   displayTeam(team: Team | null): string {
     return team ? team.schoolName : '';
   }
 
-onTeamSelected(event: MatAutocompleteSelectedEvent): void {
-  const team = event.option.value as Team;
+  onTeamSelected(event: MatAutocompleteSelectedEvent): void {
+    const team = event.option.value as Team;
 
-  if (
-    this.selectedTeams.length < 20 &&
-    !this.selectedTeams.some(t => t.espnId === team.espnId)
-  ) {
-    this.selectedTeams.unshift(team);
+    if (
+      this.selectedTeams.length < 20 &&
+      !this.selectedTeams.some(t => t.espnId === team.espnId)
+    ) {
+      this.selectedTeams.unshift(team);
+    }
+
+    this.myControl.setValue(null);
+
+    this.updateSearchState();
   }
 
-  this.myControl.setValue(null);
-
-  this.updateSearchState();
-}
-
-private updateSearchState(): void {
-  if (this.selectedTeams.length >= 20) {
-    this.myControl.disable();
-  } else {
-    this.myControl.enable();
+  private updateSearchState(): void {
+    if (this.selectedTeams.length >= 20) {
+      this.myControl.disable();
+    } else {
+      this.myControl.enable();
+    }
   }
-}
 
-clear(): void {
-  this.selectedTeams = [];
-  this.updateSearchState();
-}
+  clear(): void {
+    this.selectedTeams = [];
+    this.updateSearchState();
+  }
 
-  submit() {
+  submit(): void {
+    this.submitSuccess = false;
+    this.submitError = false;
+    this.submitMessage = '';
+
     const request: BubbleRequest = {
-      name: this.name,
-      email: this.email,
+      name: this.name.trim(),
+      email: this.email.trim(),
       teams: this.selectedTeams.map(team => team.espnId)
     };
 
     this.bubbleService.createBubble(request)
       .subscribe({
         next: response => {
-          console.log(response);
-          localStorage.setItem(
-          'cfpBubbleEmail',
-          this.email.trim()
-        );
+          console.log('Bubble created:', response);
 
-        console.log(
-          'Saved email:',
-          localStorage.getItem('cfpBubbleEmail')
-        );
+          localStorage.setItem(
+            'cfpBubbleEmail',
+            this.email.trim()
+          );
+
+          this.submitSuccess = true;
+          this.submitMessage = 'Your bubble was successfully locked in. Bubble ID: '+ response.publicId;
         },
+
         error: err => {
-          console.error(err);
+          console.log(err)
+          console.error('Failed to create bubble:', err);
+
+          this.submitError = true;
+          if (err.status == 409) {
+            this.submitMessage = 'You have reached the maximum number of bubbles.'
+          }else{
+            this.submitMessage = 'We could not save your bubble. Invalid field: ' + err.error[0].field;
+          }
+
         }
       });
   }
 
-removeTeam(team: Team): void {
-  this.selectedTeams = this.selectedTeams.filter(
-    t => t.espnId !== team.espnId
-  );
+  removeTeam(team: Team): void {
+    this.selectedTeams = this.selectedTeams.filter(
+      t => t.espnId !== team.espnId
+    );
 
-  this.updateSearchState();
-}
+    this.updateSearchState();
+  }
 }

@@ -14,11 +14,10 @@ export class BubbleService {
 
   private apiUrl = '/bubbles';
 
-  createBubble(request: BubbleRequest): Observable<string> {
+  createBubble(request: BubbleRequest): Observable<any> {
     return this.http.post(
       this.apiUrl + '/create',
-      request,
-      { responseType: 'text' }
+      request
     );
   }
 

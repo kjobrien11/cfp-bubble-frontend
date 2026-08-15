@@ -645,3 +645,65 @@ SMALL MOBILE
     }
 
 }
+
+.submit-message {
+    display: flex;
+    align-items: center;
+
+    gap: .5rem;
+
+    margin-top: .75rem;
+    padding: .7rem .8rem;
+
+    border-radius: .7rem;
+
+    font-size: .75rem;
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    animation: submit-message-appear .2s ease;
+}
+
+.submit-message mat-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+
+    flex-shrink: 0;
+
+    font-size: 1.1rem;
+}
+
+.submit-message.success {
+    background: #edf8f1;
+    border: 1px solid #d5efde;
+
+    color: #23894a;
+}
+
+.submit-message.success mat-icon {
+    color: #23894a;
+}
+
+.submit-message.error {
+    background: #fff0f1;
+    border: 1px solid #f5d4d8;
+
+    color: #c94b57;
+}
+
+.submit-message.error mat-icon {
+    color: #c94b57;
+}
+
+@keyframes submit-message-appear {
+    from {
+        opacity: 0;
+        transform: translateY(-.2rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

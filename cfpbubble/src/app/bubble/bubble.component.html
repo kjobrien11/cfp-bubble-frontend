@@ -219,6 +219,20 @@
 
                 </button>
 
+                @if (submitMessage) {
+                <div class="submit-message" [class.success]="submitSuccess" [class.error]="submitError">
+
+                    <mat-icon>
+                        {{ submitSuccess ? 'check_circle' : 'error_outline' }}
+                    </mat-icon>
+
+                    <span>
+                        {{ submitMessage }}
+                    </span>
+
+                </div>
+                }
+
             </div>
 
         </aside>
