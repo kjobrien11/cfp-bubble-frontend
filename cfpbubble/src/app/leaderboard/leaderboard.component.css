@@ -605,6 +605,27 @@ TEAMS
     overflow: hidden;
 }
 
+.desktop-team-logos {
+    display: flex;
+    align-items: center;
+
+    gap: .4rem;
+
+    min-width: 0;
+
+    overflow: hidden;
+}
+
+.mobile-team-count {
+    display: none;
+
+    color: #626a81;
+
+    font-size: .8rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
 .team-logo {
     width: 2rem;
     height: 2rem;
@@ -819,6 +840,22 @@ RESPONSIVE - MOBILE
 
 @media (max-width: 700px) {
 
+    .desktop-team-logos {
+        display: none;
+    }
+
+    .mobile-team-count {
+        display: inline-flex;
+        align-items: center;
+
+        color: #626a81;
+
+        font-size: .8rem;
+        font-weight: 700;
+
+        white-space: nowrap;
+    }
+
     .leaderboard-page {
         width: min(100% - 1rem, 95rem);
 
@@ -877,6 +914,17 @@ RESPONSIVE - MOBILE
 
         min-width: 2rem;
     }
+
+    .leaderboard-header,
+    .leaderboard-row {
+        grid-template-columns:
+            3rem
+            3rem
+            4rem
+            4rem
+            4rem
+            3rem;
+    }
 }
 
 
@@ -885,6 +933,22 @@ RESPONSIVE - SMALL MOBILE
 ========================================================= */
 
 @media (max-width: 450px) {
+
+    .desktop-team-logos {
+        display: none;
+    }
+
+    .mobile-team-count {
+        display: inline-flex;
+        align-items: center;
+
+        color: #626a81;
+
+        font-size: .8rem;
+        font-weight: 700;
+
+        white-space: nowrap;
+    }
 
     .leaderboard-page {
         width: calc(100% - 1rem);
@@ -930,4 +994,30 @@ RESPONSIVE - SMALL MOBILE
     .clear-filters-button {
         font-size: .72rem;
     }
+}
+
+.bubble-link {
+    color: black;
+
+    font-size: .95rem;
+    font-weight: 750;
+
+
+    cursor: pointer;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    transition:
+        color .2s ease;
+}
+
+.bubble-link:hover {
+    color: #4934c7;
+
+}
+
+a{
+    text-decoration: underline;
 }

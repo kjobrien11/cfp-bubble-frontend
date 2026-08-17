@@ -417,9 +417,11 @@
 
             <div class="bubble-name-cell">
 
-                <strong>
+                <a href="#" class="bubble-link" (click)="openBubble(bubble); $event.preventDefault()">
+
                     {{ bubble.name }}
-                </strong>
+
+                </a>
 
             </div>
 
@@ -428,26 +430,33 @@
 
             <div class="teams-cell">
 
-                @for (
-                team of bubble.teams.slice(0, maxVisibleTeams);
-                track team.espnId
-                ) {
+                <div class="desktop-team-logos">
 
-                <img class="team-logo" [class.team-dimmed]="!isTeamInSelectedConference(team)" [src]="team.logoUrl"
-                    [alt]="team.schoolName" [title]="team.schoolName">
+                    @for (
+                    team of bubble.teams.slice(0, maxVisibleTeams);
+                    track team.espnId
+                    ) {
 
-                }
+                    <img class="team-logo" [class.team-dimmed]="!isTeamInSelectedConference(team)" [src]="team.logoUrl"
+                        [alt]="team.schoolName" [title]="team.schoolName">
 
-                @if (bubble.teams.length > maxVisibleTeams) {
+                    }
 
-                <span class="more-teams">
-                    +{{ bubble.teams.length - maxVisibleTeams }}
+                    @if (bubble.teams.length > maxVisibleTeams) {
+
+                    <span class="more-teams">
+                        +{{ bubble.teams.length - maxVisibleTeams }}
+                    </span>
+
+                    }
+
+                </div>
+
+                <span class="mobile-team-count">
+                    {{ bubble.teams.length }} Teams
                 </span>
 
-                }
-
             </div>
-
 
             <!-- Record -->
 
@@ -515,3 +524,6 @@
     </section>
 
 </div>
+
+<app-bubble-popup [bubble]="selectedBubble" (closed)="closeBubble()">
+</app-bubble-popup>

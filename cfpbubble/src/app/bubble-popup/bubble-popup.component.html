@@ -1,0 +1,77 @@
+@if (bubble) {
+
+  <div class="popup-backdrop" (click)="close()">
+
+    <div
+      class="popup"
+      role="dialog"
+      aria-modal="true"
+      (click)="$event.stopPropagation()">
+
+      <button
+        mat-icon-button
+        class="close-button"
+        aria-label="Close"
+        (click)="close()">
+
+        <mat-icon>close</mat-icon>
+
+      </button>
+
+
+      <div class="popup-header">
+
+        <span class="popup-kicker">
+          CFP BUBBLE
+        </span>
+
+        <h2>
+          {{ bubble.name }}
+        </h2>
+
+        <span class="popup-id">
+          {{ bubble.publicId }}
+        </span>
+
+      </div>
+
+
+      <div class="popup-stats">
+
+        <div class="popup-stat">
+          <span class="stat-label">Record</span>
+          <strong>
+            {{ bubble.wins }}–{{ bubble.losses }}
+          </strong>
+        </div>
+
+        <div class="popup-stat">
+          <span class="stat-label">Win %</span>
+          <strong>
+            {{ bubble.wins / (bubble.wins + bubble.losses) * 100 | number:'1.1-1' }}%
+          </strong>
+        </div>
+
+        <div class="popup-stat">
+          <span class="stat-label">Teams</span>
+          <strong>
+            {{ bubble.teams.length }}
+          </strong>
+        </div>
+
+      </div>
+
+
+      <div class="popup-bubble">
+
+        <app-bubble-visualizer
+          [teams]="bubble.teams">
+        </app-bubble-visualizer>
+
+      </div>
+
+    </div>
+
+  </div>
+
+}

@@ -1,0 +1,246 @@
+/* =========================================================
+BACKDROP
+========================================================= */
+
+.popup-backdrop {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 1.5rem;
+
+    box-sizing: border-box;
+
+    background: rgba(25, 28, 45, .45);
+
+    backdrop-filter: blur(.35rem);
+
+    animation: popup-fade-in .2s ease;
+}
+
+
+/* =========================================================
+POPUP
+========================================================= */
+
+.popup {
+    position: relative;
+
+    width: min(100%, 38rem);
+
+    max-height: min(90vh, 48rem);
+
+    overflow-y: auto;
+
+    box-sizing: border-box;
+
+    padding: 1.5rem;
+
+    background: rgba(255, 255, 255, .97);
+
+    border: 1px solid rgba(226, 223, 244, .9);
+
+    border-radius: 1.5rem;
+
+    box-shadow:
+        0 2rem 5rem rgba(40, 35, 100, .2);
+
+    animation: popup-slide-in .2s ease;
+}
+
+
+/* =========================================================
+CLOSE
+========================================================= */
+
+.close-button {
+    position: absolute;
+
+    top: .75rem;
+    right: .75rem;
+
+    color: #7d8498;
+}
+
+.close-button:hover {
+    background: #f1efff;
+
+    color: #6046e8;
+}
+
+
+/* =========================================================
+HEADER
+========================================================= */
+
+.popup-header {
+    padding-right: 3rem;
+}
+
+.popup-kicker {
+    display: block;
+
+    margin-bottom: .35rem;
+
+    color: #705de0;
+
+    font-size: .65rem;
+    font-weight: 800;
+
+    letter-spacing: .13em;
+}
+
+.popup-header h2 {
+    margin: 0;
+
+    color: #17213d;
+
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.popup-id {
+    display: block;
+
+    margin-top: .35rem;
+
+    color: #969daf;
+
+    font-size: .7rem;
+}
+
+
+/* =========================================================
+STATS
+========================================================= */
+
+.popup-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: .75rem;
+
+    margin-top: 1.25rem;
+}
+
+.popup-stat {
+    padding: .75rem;
+
+    border-radius: .8rem;
+
+    background: #fafaff;
+
+    border: 1px solid #eeeef5;
+
+    text-align: center;
+}
+
+.popup-stat .stat-label {
+    display: block;
+
+    color: #9298aa;
+
+    font-size: .65rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+.popup-stat strong {
+    display: block;
+
+    margin-top: .2rem;
+
+    color: #29314b;
+
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+BUBBLE
+========================================================= */
+
+.popup-bubble {
+    width: min(26rem, 100%);
+
+    aspect-ratio: 1 / 1;
+
+    margin: 1.5rem auto .5rem;
+}
+
+
+/* =========================================================
+ANIMATION
+========================================================= */
+
+@keyframes popup-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes popup-slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(.5rem) scale(.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* =========================================================
+MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .popup-backdrop {
+        padding: .75rem;
+    }
+
+    .popup {
+        width: 100%;
+
+        max-height: 94vh;
+
+        padding: 1.15rem;
+
+        border-radius: 1.25rem;
+    }
+
+    .popup-header h2 {
+        font-size: 1.25rem;
+    }
+
+    .popup-stats {
+        gap: .5rem;
+    }
+
+    .popup-stat {
+        padding: .6rem .4rem;
+    }
+
+    .popup-bubble {
+        width: min(22rem, 100%);
+    }
+}

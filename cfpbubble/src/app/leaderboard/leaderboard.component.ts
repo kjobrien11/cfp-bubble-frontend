@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
-
+import { BubblePopupComponent } from '../bubble-popup/bubble-popup.component';
 import {
   MatAutocompleteModule,
   MatAutocompleteSelectedEvent
@@ -34,7 +34,8 @@ import { BubbleService } from '../services/bubble.service';
     MatInputModule,
     MatSelectModule,
     MatAutocompleteModule,
-    AsyncPipe
+    AsyncPipe,
+    BubblePopupComponent
   ],
 
   templateUrl: './leaderboard.component.html',
@@ -51,6 +52,8 @@ export class LeaderboardComponent implements OnInit {
 
   teams: Team[] = [];
   conferences: string[] = [];
+
+  selectedBubble: Bubble | null = null;
 
   /* =====================================================
    STATISTICS
@@ -633,4 +636,12 @@ export class LeaderboardComponent implements OnInit {
       this.maxVisibleTeams = 3;
     }
   }
+
+  openBubble(bubble: Bubble): void {
+  this.selectedBubble = bubble;
+}
+
+closeBubble(): void {
+  this.selectedBubble = null;
+}
 }
