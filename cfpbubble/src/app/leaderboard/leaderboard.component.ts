@@ -124,7 +124,7 @@ export class LeaderboardComponent implements OnInit {
         })
       );
 
-      this.updateVisibleTeamCount();
+    this.updateVisibleTeamCount();
 
     window.addEventListener('resize', () => {
       this.updateVisibleTeamCount();
@@ -638,16 +638,16 @@ export class LeaderboardComponent implements OnInit {
   }
 
   openBubble(bubble: Bubble): void {
-  this.selectedBubble = bubble;
-}
-
-closeBubble(): void {
-  this.selectedBubble = null;
-}
-
-openBubbleFromRow(bubble: Bubble): void {
-  if (window.innerWidth <= 700) {
-    this.openBubble(bubble);
+    this.selectedBubble = bubble;
   }
-}
+
+  closeBubble(): void {
+    this.selectedBubble = null;
+  }
+
+  openBubbleFromRow(bubble: Bubble): void {
+    if (window.innerWidth <= 700) {
+      this.openBubble(bubble);
+    }
+  }
 }
