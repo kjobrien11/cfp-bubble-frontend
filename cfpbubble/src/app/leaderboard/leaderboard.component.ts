@@ -644,4 +644,10 @@ export class LeaderboardComponent implements OnInit {
 closeBubble(): void {
   this.selectedBubble = null;
 }
+
+openBubbleFromRow(bubble: Bubble): void {
+  if (window.innerWidth <= 700) {
+    this.openBubble(bubble);
+  }
+}
 }
