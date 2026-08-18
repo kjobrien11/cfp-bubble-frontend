@@ -135,7 +135,7 @@ export class BubbleComponent implements OnInit {
           );
 
           this.submitSuccess = true;
-          this.submitMessage = 'Your bubble was successfully locked in. Bubble ID: '+ response.publicId;
+          this.submitMessage = 'Your bubble was successfully locked in. Bubble ID: ' + response.publicId;
         },
 
         error: err => {
@@ -143,9 +143,11 @@ export class BubbleComponent implements OnInit {
           console.error('Failed to create bubble:', err);
 
           this.submitError = true;
-          if (err.status == 409) {
+          if (err.status === 429) {
+            this.submitMessage = 'Too many attempts. Please wait a while and try again.';
+          }else if (err.status == 409) {
             this.submitMessage = 'You have reached the maximum number of bubbles.'
-          }else{
+          } else {
             this.submitMessage = 'We could not save your bubble. Invalid field: ' + err.error[0].field;
           }
 
