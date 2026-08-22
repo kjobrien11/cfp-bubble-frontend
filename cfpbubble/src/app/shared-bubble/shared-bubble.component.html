@@ -1,0 +1,43 @@
+<div
+    class="bubble"
+    [class.extra-small-bubble]="teams.length <= 3"
+    [class.small-bubble]="teams.length > 3 && teams.length <= 6"
+    [class.medium-bubble]="teams.length > 6 && teams.length <= 9"
+    [class.large-bubble]="teams.length > 9 && teams.length <= 14"
+    [class.extra-large-bubble]="teams.length > 14">
+
+    <div class="bubble-highlight"></div>
+
+
+    @for (
+        team of teams;
+        track team.espnId;
+        let i = $index
+    ) {
+
+        <div
+            class="logo-wrapper"
+            [class.logo-1]="i % 4 === 0"
+            [class.logo-2]="i % 4 === 1"
+            [class.logo-3]="i % 4 === 2"
+            [class.logo-4]="i % 4 === 3">
+
+            <img
+                class="logo"
+                [src]="
+                    'https://a.espncdn.com/i/teamlogos/ncaa/500/' +
+                    team.espnId +
+                    '.png'
+                "
+                [alt]="team.schoolName">
+
+        </div>
+
+    }
+
+
+    <div class="bubble-footer">
+        cfpbubble.com
+    </div>
+
+</div>

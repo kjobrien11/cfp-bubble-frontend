@@ -18,13 +18,17 @@
             </div>
 
             <div class="bubble-container">
+
                 <app-bubble-visualizer [teams]="selectedTeams">
                 </app-bubble-visualizer>
+
             </div>
 
             <div class="counter">
 
-                <strong>{{ selectedTeams.length }}</strong>
+                <strong>
+                    {{ selectedTeams.length }}
+                </strong>
 
                 {{ selectedTeams.length === 1 ? 'Team' : 'Teams' }}
 
@@ -44,7 +48,9 @@
                     BUILD YOUR BUBBLE
                 </span>
 
-                <h2>Add Teams</h2>
+                <h2>
+                    Add Teams
+                </h2>
 
                 <p>
                     Select the teams you think could become
@@ -54,9 +60,12 @@
             </div>
 
 
+            <!-- Team Search -->
             <mat-form-field appearance="outline" class="team-search">
 
-                <mat-label>Search teams</mat-label>
+                <mat-label>
+                    Search teams
+                </mat-label>
 
                 <mat-icon matPrefix>
                     search
@@ -83,10 +92,15 @@
 
             </mat-form-field>
 
+
             @if (selectedTeams.length >= 20) {
+
             <div class="max-teams-message">
+
                 Maximum of 20 teams reached.
+
             </div>
+
             }
 
 
@@ -101,7 +115,9 @@
                             {{ selectedTeams.length }}
                         </span>
 
-                        <span>Teams in your bubble</span>
+                        <span>
+                            Teams in your bubble
+                        </span>
 
                     </div>
 
@@ -128,8 +144,11 @@
 
                     <div class="team-row">
 
-                        <img [src]="'https://a.espncdn.com/i/teamlogos/ncaa/500/' + team.espnId + '.png'"
-                            [alt]="team.schoolName">
+                        <img [src]="
+                                    'https://a.espncdn.com/i/teamlogos/ncaa/500/' +
+                                    team.espnId +
+                                    '.png'
+                                " [alt]="team.schoolName">
 
                         <span>
                             {{ team.schoolName }}
@@ -138,7 +157,9 @@
                         <button mat-icon-button class="remove-button" (click)="removeTeam(team)"
                             aria-label="Remove team">
 
-                            <mat-icon>close</mat-icon>
+                            <mat-icon>
+                                close
+                            </mat-icon>
 
                         </button>
 
@@ -151,7 +172,9 @@
 
                     <div class="empty-list">
 
-                        <mat-icon>sports_football</mat-icon>
+                        <mat-icon>
+                            sports_football
+                        </mat-icon>
 
                         <span>
                             Your selected teams will appear here
@@ -177,7 +200,9 @@
                     ALMOST THERE
                 </span>
 
-                <h3>Lock your bubble</h3>
+                <h3>
+                    Lock your bubble
+                </h3>
 
                 <p class="lock-description">
                     Once submitted, your bubble can't be changed.
@@ -186,7 +211,9 @@
 
                 <mat-form-field appearance="outline">
 
-                    <mat-label>Bubble Name</mat-label>
+                    <mat-label>
+                        Bubble Name
+                    </mat-label>
 
                     <mat-icon matPrefix>
                         label_outline
@@ -199,7 +226,9 @@
 
                 <mat-form-field appearance="outline">
 
-                    <mat-label>Email</mat-label>
+                    <mat-label>
+                        Email
+                    </mat-label>
 
                     <mat-icon matPrefix>
                         mail_outline
@@ -210,20 +239,31 @@
                 </mat-form-field>
 
 
-                <button mat-flat-button color="primary" class="submit-button"
-                    [disabled]="!name?.trim() || !email?.trim() || selectedTeams.length === 0" (click)="submit()">
+                <button mat-flat-button color="primary" class="submit-button" [disabled]="
+                        !name.trim() ||
+                        !email.trim() ||
+                        selectedTeams.length === 0
+                    " (click)="submit()">
 
-                    <mat-icon>lock</mat-icon>
+                    <mat-icon>
+                        lock
+                    </mat-icon>
 
                     Lock My Bubble
 
                 </button>
 
+
                 @if (submitMessage) {
+
                 <div class="submit-message" [class.success]="submitSuccess" [class.error]="submitError">
 
                     <mat-icon>
-                        {{ submitSuccess ? 'check_circle' : 'error_outline' }}
+                        {{
+                        submitSuccess
+                        ? 'check_circle'
+                        : 'error_outline'
+                        }}
                     </mat-icon>
 
                     <span>
@@ -231,6 +271,7 @@
                     </span>
 
                 </div>
+
                 }
 
             </div>
@@ -240,3 +281,97 @@
     </main>
 
 </div>
+
+
+<!-- Share Popup -->
+@if (showSharePopup) {
+
+<div class="share-overlay" (click)="closeSharePopup()">
+
+    <div class="share-popup" (click)="$event.stopPropagation()">
+
+
+        <!-- Popup Header -->
+        <div class="share-popup-header">
+
+            <div>
+
+                <span class="panel-kicker">
+                    SHARE YOUR BUBBLE
+                </span>
+
+                <h2>
+                    {{ name }}
+                </h2>
+
+            </div>
+
+
+            <button mat-icon-button aria-label="Close share popup" (click)="closeSharePopup()">
+
+                <mat-icon>
+                    close
+                </mat-icon>
+
+            </button>
+
+        </div>
+
+
+        <!-- Bubble Preview -->
+        <div class="share-preview">
+
+            <app-share-bubble [teams]="selectedTeams" [bubbleName]="name">
+            </app-share-bubble>
+
+        </div>
+
+
+        <!-- Share Actions -->
+        <div class="share-popup-actions">
+
+            <button mat-flat-button class="share-popup-primary" (click)="shareBubble()">
+
+                <mat-icon>
+                    share
+                </mat-icon>
+
+                Share Bubble
+
+            </button>
+
+
+            <button mat-stroked-button class="share-popup-secondary" (click)="makeAnotherBubble()">
+
+                <mat-icon>
+                    add
+                </mat-icon>
+
+                Make Another Bubble
+
+            </button>
+
+        </div>
+
+
+        @if (shareMessage) {
+
+        <div class="share-message">
+
+            <mat-icon>
+                check
+            </mat-icon>
+
+            <span>
+                {{ shareMessage }}
+            </span>
+
+        </div>
+
+        }
+
+    </div>
+
+</div>
+
+}
