@@ -21,8 +21,9 @@ export class SharedBubbleComponent {
   @Input()
   bubbleName = '';
 
-  readonly logoBaseUrl =
-    'https://a.espncdn.com/i/teamlogos/ncaa/500/';
+  teamLogo(team: Team): string {
+  return `team-logos/${team.espnId}.png`;
+}
 
   get teamCountLabel(): string {
     return this.teams.length === 1
